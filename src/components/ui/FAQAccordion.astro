@@ -1,0 +1,85 @@
+---
+import Icon from './Icon.astro';
+import type { FAQItem } from '../../data/faqs';
+
+interface Props {
+  items: FAQItem[];
+  idPrefix?: string;
+}
+
+const { items, idPrefix = 'faq' } = Astro.props;
+---
+
+<div class="divide-y divide-charcoal-750 border-t border-b border-charcoal-750" data-faq-accordion>
+  {items.map((item, index) => {
+    const buttonId = `${idPrefix}-btn-${item.id}`;
+    const panelId = `${idPrefix}-panel-${item.id}`;
+    const isFirst = index === 0;
+
+    return (
+      <div class="py-5 sm:py-6" data-faq-item>
+        <h3>
+          <button
+            type="button"
+            id={buttonId}
+            aria-expanded={isFirst ? 'true' : 'false'}
+            aria-controls={panelId}
+            data-faq-trigger
+            class="w-full flex items-center justify-between gap-6 text-left py-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-cobalt-400 rounded-sm"
+          >
+            <span class="font-display font-semibold text-lg sm:text-xl text-ivory-50 group-hover:text-cobalt-400 transition-colors">
+              {item.question}
+            </span>
+            <span
+              data-faq-icon
+              class:list={[
+                'w-9 h-9 rounded-sm border border-charcoal-750 bg-charcoal-900 flex items-center justify-center text-cobalt-400 shrink-0 transition-transform duration-200',
+                isFirst && 'rotate-45 border-cobalt-500/60',
+              ]}
+            >
+              <Icon name="plus" class="w-4 h-4" />
+            </span>
+          </button>
+        </h3>
+
+        <div
+          id={panelId}
+          role="region"
+          aria-labelledby={buttonId}
+          data-faq-panel
+          class:list={['pt-3 pr-4 sm:pr-12 text-ivory-300 text-base leading-relaxed', !isFirst && 'hidden']}
+        >
+          <p class="max-w-[65ch]">{item.answer}</p>
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+<script>
+  function setupAccordions() {
+    const accordions = document.querySelectorAll('[data-faq-accordion]');
+    accordions.forEach((accordion) => {
+      const triggers = accordion.querySelectorAll<HTMLButtonElement>('[data-faq-trigger]');
+      triggers.forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+          const panelId = trigger.getAttribute('aria-controls');
+          const panel = panelId ? document.getElementById(panelId) : null;
+          const icon = trigger.querySelector('[data-faq-icon]');
+
+          trigger.setAttribute('aria-expanded', String(!isExpanded));
+          if (panel) {
+            panel.classList.toggle('hidden', isExpanded);
+          }
+          if (icon) {
+            icon.classList.toggle('rotate-45', !isExpanded);
+            icon.classList.toggle('border-cobalt-500/60', !isExpanded);
+          }
+        });
+      });
+    });
+  }
+
+  setupAccordions();
+</script>

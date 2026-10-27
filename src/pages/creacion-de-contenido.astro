@@ -1,0 +1,250 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/ui/Icon.astro';
+import ConversionCalendarBlock from '../components/sections/ConversionCalendarBlock.astro';
+import {
+  getCalendarUrl,
+  isExternalCalendarUrl,
+  getWhatsAppUrl,
+} from '../data/siteConfig';
+
+const calendarHref = getCalendarUrl('/contacto#agendar');
+const calendarExternal = isExternalCalendarUrl();
+const whatsappHref = getWhatsAppUrl('creacion-de-contenido');
+
+const workflowStages = [
+  {
+    title: 'Estrategia Temática y Ángulos Narrativos',
+    description:
+      'Definimos qué temas abonan directamente a la reputación y los objetivos comerciales de tu marca, evitando la improvisación de último minuto.',
+    icon: 'compass' as const,
+  },
+  {
+    title: 'Guionización y Escaletas con Intención',
+    description:
+      'Escribimos guiones estructurados con ganchos claros, desarrollo ágil y cierres que invitan a la conversación o la consulta.',
+    icon: 'layers' as const,
+  },
+  {
+    title: 'Rodaje Dirigido con Estética Cinematográfica',
+    description:
+      'Ejecutamos jornadas de grabación planificadas con iluminación controlada, captura de audio limpio y dirección frente a cámara.',
+    icon: 'film' as const,
+  },
+  {
+    title: 'Postproducción, Ritmo y Color',
+    description:
+      'Editamos cada pieza cuidando la narrativa visual, el diseño sonoro y la corrección de color para entregar activos listos para publicar.',
+    icon: 'sliders' as const,
+  },
+];
+---
+
+<Layout
+  title="Creación de Contenido Estratégico y Producción Audiovisual | Cobalto Carmesí Studios"
+  description="Conceptualización, guion, dirección en set, producción audiovisual y tomas con drones para marcas y empresas que buscan contenido con intención y estética."
+  canonicalPath="/creacion-de-contenido"
+  whatsappContext="creacion-de-contenido"
+>
+  <!-- HERO DE SERVICIO PRIORITARIO 2 -->
+  <section class="py-16 sm:py-24 bg-charcoal-950 bg-cobalt-chiaroscuro border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-6">
+        <span class="inline-flex items-center px-3 py-1 rounded-sm bg-cobalt-900/40 border border-cobalt-600/40 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+          Servicio Prioritario · Estrategia, Guion y Producción Audiovisual
+        </span>
+
+        <h1 class="font-display font-bold text-4xl sm:text-5xl text-ivory-50 leading-[1.08] tracking-tight">
+          Creación de Contenido Estratégico para Redes Sociales con dirección cinematográfica.
+        </h1>
+
+        <p class="text-lg sm:text-xl text-ivory-300 leading-relaxed">
+          Desarrollamos contenido que une fondo y forma: conceptualización, guion, dirección en set y postproducción audiovisual para marcas y empresas que necesitan destacar sin caer en el ruido genérico.
+        </p>
+
+        <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <a
+            href={calendarHref}
+            target={calendarExternal ? '_blank' : undefined}
+            rel={calendarExternal ? 'noopener noreferrer' : undefined}
+            data-track-cta="calendar_booking"
+            data-track-location="contenido-hero"
+            data-track-context="Agendar sesión de diagnóstico"
+            class="btn-primary justify-center"
+          >
+            <Icon name="calendar" class="w-5 h-5" />
+            <span>Agendar sesión de diagnóstico</span>
+          </a>
+
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track-cta="whatsapp_message"
+            data-track-location="contenido-hero"
+            data-track-context="Escribir por WhatsApp"
+            class="btn-secondary justify-center"
+          >
+            <Icon name="message-circle" class="w-5 h-5 text-cobalt-400" />
+            <span>Escribir por WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METODOLOGÍA DE CREACIÓN DE CONTENIDO -->
+  <section class="py-16 md:py-24 bg-charcoal-900 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12">
+        <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+          De la Idea a la Pantalla
+        </p>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight mb-4">
+          Publicar por publicar desgasta a tu equipo. Producir con estrategia construye un activo de marca.
+        </h2>
+        <p class="text-base text-ivory-300 leading-relaxed">
+          Organizamos la producción por bloques estratégicos para optimizar tu tiempo, garantizar consistencia estética y entregar piezas verticales u horizontales con verdadero valor comunicativo.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        {workflowStages.map((stage) => (
+          <div class="rounded-md border border-charcoal-750 bg-charcoal-950 p-6 sm:p-8">
+            <div class="w-10 h-10 rounded-sm bg-charcoal-900 border border-charcoal-750 flex items-center justify-center text-cobalt-400 mb-5">
+              <Icon name={stage.icon} class="w-5 h-5" />
+            </div>
+            <h3 class="font-display font-bold text-xl text-ivory-50 mb-3">
+              {stage.title}
+            </h3>
+            <p class="text-sm sm:text-base text-ivory-300 leading-relaxed">
+              {stage.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTA EXPLÍCITA DE ALCANCE Y LÍMITES OPERATIVOS (CA-CAT-03 / CA-COMM-01) -->
+  <section class="py-14 md:py-20 bg-charcoal-950 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-md border border-charcoal-750 bg-charcoal-900 p-6 sm:p-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div class="lg:col-span-5">
+            <span class="inline-flex items-center gap-2 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+              <Icon name="shield-check" class="w-4 h-4" />
+              <span>Transparencia de Alcance Operativo</span>
+            </span>
+            <h2 class="font-display font-bold text-2xl sm:text-3xl text-ivory-50 leading-snug">
+              Lo que hacemos con excelencia y lo que deliberadamente no incluimos.
+            </h2>
+          </div>
+
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="p-5 rounded-sm bg-charcoal-950 border border-charcoal-750">
+              <h3 class="font-display font-bold text-base text-ivory-50 mb-3 flex items-center gap-2">
+                <Icon name="check" class="w-4 h-4 text-cobalt-400" />
+                <span>Nuestro foco de alto valor</span>
+              </h3>
+              <p class="text-sm text-ivory-300 leading-relaxed">
+                Estrategia narrativa, conceptualización creativa, escritura de guiones, dirección escénica en set, iluminación cinematográfica, grabación profesional y postproducción avanzada.
+              </p>
+            </div>
+
+            <div class="p-5 rounded-sm bg-charcoal-950 border border-charcoal-750">
+              <h3 class="font-display font-bold text-base text-ivory-50 mb-3 flex items-center gap-2">
+                <Icon name="x" class="w-4 h-4 text-crimson-500" />
+                <span>Límites claros del servicio</span>
+              </h3>
+              <p class="text-sm text-ivory-300 leading-relaxed">
+                No operamos como agencia de <em>community management</em> automatizado (respuesta diaria de mensajes o publicación de efemérides de relleno) ni administramos pauta publicitaria pagada.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSECCIÓN ANCLADA: PRODUCCIÓN AUDIOVISUAL Y TOMAS CON DRONES (SERVICIO F) -->
+  <section id="produccion-y-drones" class="py-16 md:py-24 bg-charcoal-900 border-b border-charcoal-750 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-7 space-y-5">
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-charcoal-850 border border-charcoal-750 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+            <Icon name="video" class="w-4 h-4" />
+            <span>Especialidad Técnica · Producción Institucional y Aérea</span>
+          </span>
+
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight">
+            Producción Audiovisual Comercial y Cinematografía con Drones.
+          </h2>
+
+          <p class="text-base text-ivory-300 leading-relaxed">
+            Cuando tu proyecto requiere dimensionar espacios arquitectónicos, desarrollos inmobiliarios, naves industriales, complejos turísticos o campañas institucionales, integramos rodaje en tierra con tomas aéreas estabilizadas de alta precisión.
+          </p>
+
+          <ul class="space-y-3 pt-2">
+            <li class="flex items-start gap-2.5 text-sm text-ivory-300">
+              <Icon name="check" class="w-4 h-4 text-cobalt-400 shrink-0 mt-0.5" />
+              <span>Videos institucionales, manifiestos de marca y piezas comerciales para web y presentaciones de negocio.</span>
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-ivory-300">
+              <Icon name="check" class="w-4 h-4 text-cobalt-400 shrink-0 mt-0.5" />
+              <span>Levantamiento aéreo con dron para arquitectura, bienes raíces, industria, hotelería y eventos corporativos.</span>
+            </li>
+            <li class="flex items-start gap-2.5 text-sm text-ivory-300">
+              <Icon name="check" class="w-4 h-4 text-cobalt-400 shrink-0 mt-0.5" />
+              <span>Montaje narrativo, diseño sonoro y etalonaje profesional en formatos horizontales y verticales.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-5 rounded-md border border-charcoal-750 bg-charcoal-950 p-6 sm:p-8 space-y-5">
+          <h3 class="font-display font-bold text-xl text-ivory-50">
+            Cotiza una jornada de producción o levantamiento aéreo
+          </h3>
+          <p class="text-sm text-ivory-300 leading-relaxed">
+            Evaluamos locación, requerimientos técnicos de vuelo, tiempos de rodaje y entregables para estructurar una propuesta precisa.
+          </p>
+          <div class="flex flex-col gap-3">
+            <a
+              href={calendarHref}
+              target={calendarExternal ? '_blank' : undefined}
+              rel={calendarExternal ? 'noopener noreferrer' : undefined}
+              data-track-cta="calendar_booking"
+              data-track-location="contenido-drones"
+              data-track-context="Agendar llamada por Producción y Drones"
+              class="btn-primary w-full justify-center"
+            >
+              <Icon name="calendar" class="w-4 h-4" />
+              <span>Agendar llamada de producción</span>
+            </a>
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-cta="whatsapp_message"
+              data-track-location="contenido-drones"
+              data-track-context="Consultar Drones por WhatsApp"
+              class="btn-secondary w-full justify-center"
+            >
+              <Icon name="message-circle" class="w-4 h-4 text-cobalt-400" />
+              <span>Escribir por WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ConversionCalendarBlock
+    eyebrow="Creación de Contenido y Producción"
+    title="Elevemos el estándar narrativo y visual de los canales de tu marca."
+    description="Agenda una sesión de diagnóstico para revisar tus objetivos de comunicación y definir el esquema de producción ideal para tu empresa."
+    primaryCtaLabel="Agendar sesión de diagnóstico"
+    secondaryCtaLabel="Escribir por WhatsApp"
+    whatsappContext="creacion-de-contenido"
+  />
+</Layout>

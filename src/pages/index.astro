@@ -1,0 +1,423 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/ui/Icon.astro';
+import ServiceCard from '../components/cards/ServiceCard.astro';
+import ProjectCard from '../components/cards/ProjectCard.astro';
+import FAQAccordion from '../components/ui/FAQAccordion.astro';
+import ConversionCalendarBlock from '../components/sections/ConversionCalendarBlock.astro';
+import {
+  siteConfig,
+  getCalendarUrl,
+  isExternalCalendarUrl,
+  getWhatsAppUrl,
+} from '../data/siteConfig';
+import { priorityServices, complementaryServices } from '../data/services';
+import { homeFeaturedProjects } from '../data/projects';
+import { faqs } from '../data/faqs';
+
+const calendarHref = getCalendarUrl('/contacto#agendar');
+const calendarExternal = isExternalCalendarUrl();
+const whatsappHref = getWhatsAppUrl('inicio');
+
+const studioArguments = [
+  {
+    title: 'Dirección estratégica antes de encender la cámara',
+    description:
+      'No grabamos ni fotografiamos por inercia. Cada encuadre, guion y decisión de luz parte de lo que tu marca o perfil profesional necesita proyectar.',
+    icon: 'compass' as const,
+  },
+  {
+    title: 'Estética cinematográfica y carácter de claroscuro',
+    description:
+      'Cuidamos el contraste, la atmósfera, el sonido y la composición para que tu imagen destaque frente a la saturación de contenido genérico.',
+    icon: 'eye' as const,
+  },
+  {
+    title: 'Acompañamiento escénico paso a paso',
+    description:
+      'Dirigimos postura, voz, ritmo e intención frente a cámara para que incluso quienes no tienen experiencia previa se perciban sólidos y auténticos.',
+    icon: 'users' as const,
+  },
+  {
+    title: 'Soluciones integrales bajo un mismo criterio',
+    description:
+      'Articulamos consultoría de marca personal, contenido continuo, fotografía comercial, producción con drones y formación sin perder coherencia visual.',
+    icon: 'layers' as const,
+  },
+  {
+    title: 'Propuestas a la medida de tu proyecto',
+    description:
+      'Diagnosticamos tu necesidad real mediante una conversación directa para diseñar un alcance honesto, claro y sin paquetes rígidos de relleno.',
+    icon: 'shield-check' as const,
+  },
+];
+
+const workMethodSteps = [
+  {
+    stepLabel: 'Fase I · Diagnóstico y Claridad',
+    title: 'Conversación de diagnóstico y definición de intención',
+    description:
+      'Escuchamos tu contexto actual, analizamos qué proyecta hoy tu marca o perfil y definimos el objetivo estratégico y el alcance real de producción.',
+  },
+  {
+    stepLabel: 'Fase II · Arquitectura y Preproducción',
+    title: 'Concepto visual, narrativa, guiones y planeación técnica',
+    description:
+      'Aterrizamos el tono comunicativo, escribimos escaletas o guiones, diseñamos el esquema de iluminación y preparamos cada detalle del rodaje o sesión.',
+  },
+  {
+    stepLabel: 'Fase III · Dirección y Captura en Set',
+    title: 'Ejecución con dirección escénica y rigor técnico',
+    description:
+      'Lideramos la sesión fotográfica o el rodaje audiovisual cuidando tu expresión frente a cámara, la estética en claroscuro, el audio y la composición.',
+  },
+  {
+    stepLabel: 'Fase IV · Postproducción y Entrega Estratégica',
+    title: 'Edición, color, curaduría fina y despliegue',
+    description:
+      'Entregamos piezas listas para publicar o implementar en tus canales comerciales, alineadas con la reputación y el valor que deseas construir.',
+  },
+];
+---
+
+<Layout
+  title="Cobalto Carmesí Studios | Estudio Creativo de Imagen, Contenido y Producción Audiovisual"
+  description="Estudio creativo liderado por Darío Ilescas Cruz. Consultoría de marca personal, creación de contenido estratégico, fotografía corporativa y producción audiovisual."
+  canonicalPath="/"
+  whatsappContext="inicio"
+>
+  <!-- BLOQUE 1: HERO PRINCIPAL (CA-HOME-01 / CA-CONV-01) -->
+  <section class="relative py-16 sm:py-24 lg:py-28 bg-charcoal-950 bg-cobalt-chiaroscuro border-b border-charcoal-750 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+        <!-- Columna Editorial (7 cols en desktop) -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-sm bg-charcoal-900 border border-charcoal-750">
+            <span class="w-2 h-2 rounded-full bg-cobalt-400"></span>
+            <span class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-ivory-300">
+              Cobalto Carmesí Studios · Evolución de Sefirot
+            </span>
+          </div>
+
+          <h1 class="font-display font-bold text-4xl sm:text-5xl lg:text-[3.5rem] text-ivory-50 leading-[1.06] tracking-tight">
+            Estrategia, estética y narrativa para construir presencia, reputación y deseo.
+          </h1>
+
+          <p class="text-lg sm:text-xl text-ivory-300 leading-relaxed max-w-[62ch]">
+            Somos un estudio creativo de imagen, contenido y producción audiovisual para marcas, empresas y profesionistas que necesitan verse más sólidos, comunicar mejor y proyectar el verdadero valor de lo que hacen.
+          </p>
+
+          <!-- Par jerárquico de conversión: Google Calendar (Primario) + WhatsApp (Secundario) -->
+          <div class="pt-3 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            <a
+              href={calendarHref}
+              target={calendarExternal ? '_blank' : undefined}
+              rel={calendarExternal ? 'noopener noreferrer' : undefined}
+              data-track-cta="calendar_booking"
+              data-track-location="home-hero"
+              data-track-context="Agendar videollamada"
+              class="btn-primary justify-center"
+            >
+              <Icon name="calendar" class="w-5 h-5" />
+              <span>Agendar videollamada</span>
+            </a>
+
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-cta="whatsapp_message"
+              data-track-location="home-hero"
+              data-track-context="Escribir por WhatsApp"
+              class="btn-secondary justify-center"
+            >
+              <Icon name="message-circle" class="w-5 h-5 text-cobalt-400" />
+              <span>Escribir por WhatsApp</span>
+            </a>
+          </div>
+
+          <div class="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 border-t border-charcoal-750 text-xs text-slate-400">
+            <div class="flex items-center gap-2">
+              <Icon name="compass" class="w-4 h-4 text-cobalt-400 shrink-0" />
+              <span>Dirección Creativa: Darío Ilescas Cruz</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon name="shield-check" class="w-4 h-4 text-cobalt-400 shrink-0" />
+              <span>Atención consultiva a medida</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <Icon name="video" class="w-4 h-4 text-cobalt-400 shrink-0" />
+              <span>Imagen, Contenido y Producción</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Composición Arquitectónica en Claroscuro (5 cols en desktop) -->
+        <div class="lg:col-span-5">
+          <div class="relative rounded-md border border-charcoal-750 bg-charcoal-900 p-6 sm:p-8 shadow-2xl">
+            <div class="aspect-[4/5] rounded-sm border border-charcoal-750 bg-charcoal-950 overflow-hidden relative flex flex-col justify-between p-6">
+              <img
+                src="/media/portfolio/case-cobalto-evolucion.svg"
+                alt="Composición arquitectónica en claroscuro con luz azul cobalto y acento carmesí de Cobalto Carmesí Studios"
+                width="1280"
+                height="720"
+                fetchpriority="high"
+                decoding="async"
+                class="absolute inset-0 w-full h-full object-cover opacity-85"
+              />
+              <div class="relative z-10 flex items-center justify-between">
+                <span class="px-3 py-1 rounded-sm bg-charcoal-950/90 border border-charcoal-750 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+                  Claroscuro & Dirección Visual
+                </span>
+              </div>
+
+              <div class="relative z-10 bg-charcoal-950/90 backdrop-blur-md border border-charcoal-750 p-5 rounded-sm space-y-2">
+                <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+                  Líneas Prioritarias del Estudio
+                </p>
+                <p class="font-display font-bold text-lg text-ivory-50 leading-snug">
+                  Consultoría de Marca Personal & Creación de Contenido Estratégico
+                </p>
+                <p class="text-xs text-ivory-300 leading-relaxed">
+                  Respaldadas por fotografía corporativa, sesiones de autor, cine aéreo con drones y formación creativa.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 2: MANIFIESTO / DECLARACIÓN DE POSICIONAMIENTO -->
+  <section class="py-16 md:py-24 bg-charcoal-900 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-5">
+          <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+            Posicionamiento Editorial · Qué es Cobalto Carmesí
+          </p>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight">
+            Cuando lo que haces tiene valor real, tu imagen no puede quedarse atrás.
+          </h2>
+        </div>
+
+        <div class="lg:col-span-7 space-y-5 text-base sm:text-lg text-ivory-300 leading-relaxed">
+          <p>
+            Muchas empresas, marcas y profesionistas cuentan con una trayectoria sólida, pero su presencia digital comunica improvisación o se diluye entre fórmulas genéricas. En <strong class="text-ivory-50 font-medium">Cobalto Carmesí Studios</strong> —la evolución estratégica y creativa de <em>Sefirot</em>— unimos la profundidad intelectual del azul cobalto con la fuerza emocional del carmesí.
+          </p>
+          <p>
+            No entregamos piezas sueltas sin dirección. Diseñamos la narrativa, dirigimos tu presencia frente a cámara y ejecutamos la producción fotográfica y audiovisual con rigor estético para que tu audiencia perciba claridad, autoridad y confianza desde el primer contacto.
+          </p>
+          <div class="pt-2">
+            <a
+              href="/el-estudio"
+              class="inline-flex items-center gap-2 text-sm font-semibold text-cobalt-400 hover:text-ivory-50 transition-colors"
+            >
+              <span>Conocer la filosofía del estudio y su Dirección Creativa</span>
+              <Icon name="arrow-right" class="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 3: SERVICIOS DESTACADOS (JERARQUÍA 2 PRIORITARIOS + COMPLEMENTARIOS) -->
+  <section id="servicios" class="py-16 md:py-24 lg:py-28 bg-charcoal-950 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-14">
+        <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+          Arquitectura de Servicios · Soluciones a Medida
+        </p>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-[2.5rem] text-ivory-50 leading-tight mb-4">
+          Dos ejes prioritarios de posicionamiento y un ecosistema de producción especializado.
+        </h2>
+        <p class="text-base sm:text-lg text-ivory-300 leading-relaxed">
+          Priorizamos el acompañamiento en marca personal y la creación de contenido estratégico para redes sociales, integrando fotografía comercial, sesiones de retrato, drones, cobertura de eventos y capacitación bajo un mismo estándar visual.
+        </p>
+      </div>
+
+      <!-- Fila Superior: Los 2 Servicios Prioritarios (A y B) -->
+      <div class="mb-10">
+        <div class="flex items-center justify-between mb-5">
+          <h3 class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-ivory-100">
+            Servicios Prioritarios de Posicionamiento y Contenido
+          </h3>
+          <span class="hidden sm:inline-block text-xs text-slate-400">
+            Enfoque principal del estudio
+          </span>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+          {priorityServices.map((service) => (
+            <ServiceCard service={service} featured={true} />
+          ))}
+        </div>
+      </div>
+
+      <!-- Fila Inferior: Servicios Estratégicos y Complementarios (C, D, E, F, G) -->
+      <div>
+        <div class="flex items-center justify-between mb-5 pt-6 border-t border-charcoal-750">
+          <h3 class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-ivory-300">
+            Servicios Estratégicos y Especialidades de Producción
+          </h3>
+          <span class="hidden sm:inline-block text-xs text-slate-400">
+            Fotografía, Eventos Sociales, Drones y Formación
+          </span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {complementaryServices.map((service) => (
+            <ServiceCard service={service} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 4: POR QUÉ ELEGIR EL ESTUDIO (5 ARGUMENTOS REALES) -->
+  <section class="py-16 md:py-24 bg-charcoal-900 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12">
+        <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+          Criterio Diferenciador · Por qué elegirnos
+        </p>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight mb-4">
+          Más que proveedores de cámara, somos dirección creativa aplicada a tu reputación.
+        </h2>
+        <p class="text-base text-ivory-300 leading-relaxed">
+          Nuestra diferencia radica en traducir objetivos de negocio y posicionamiento profesional en piezas visuales con intención, sobriedad y permanencia.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {studioArguments.map((arg) => (
+          <div class="rounded-md border border-charcoal-750 bg-charcoal-950 p-6 sm:p-8 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-sm bg-charcoal-900 border border-charcoal-750 flex items-center justify-center text-cobalt-400 mb-5">
+                <Icon name={arg.icon} class="w-5 h-5" />
+              </div>
+              <h3 class="font-display font-bold text-xl text-ivory-50 mb-3 leading-snug">
+                {arg.title}
+              </h3>
+              <p class="text-sm text-ivory-300 leading-relaxed">
+                {arg.description}
+              </p>
+            </div>
+          </div>
+        ))}
+
+        <!-- Tarjeta de Dirección Creativa -->
+        <div class="rounded-md border border-cobalt-600/40 bg-charcoal-950 bg-cobalt-chiaroscuro p-6 sm:p-8 flex flex-col justify-between">
+          <div>
+            <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-2">
+              Respaldo Autoral
+            </p>
+            <h3 class="font-display font-bold text-xl text-ivory-50 mb-3 leading-snug">
+              Dirección Creativa por {siteConfig.brand.creativeDirector.name}
+            </h3>
+            <p class="text-sm text-ivory-300 leading-relaxed mb-6">
+              {siteConfig.brand.creativeDirector.bioSummary}
+            </p>
+          </div>
+          <a
+            href="/el-estudio"
+            class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.08em] text-cobalt-400 hover:text-ivory-50 transition-colors"
+          >
+            <span>Conocer trayectoria y visión</span>
+            <Icon name="arrow-right" class="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 5: CASOS Y PROYECTOS DESTACADOS (CA-PORT-01 / CA-PORT-02) -->
+  <section class="py-16 md:py-24 lg:py-28 bg-charcoal-950 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+        <div class="max-w-2xl">
+          <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+            Portafolio Seleccionado · Evidencia Real
+          </p>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight">
+            Proyectos donde la dirección visual resolvió necesidades concretas de posicionamiento.
+          </h2>
+        </div>
+        <a
+          href="/proyectos"
+          class="btn-secondary shrink-0 self-start md:self-auto"
+        >
+          <span>Explorar todos los casos</span>
+          <Icon name="arrow-right" class="w-4 h-4" />
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+        {homeFeaturedProjects.map((project) => (
+          <ProjectCard project={project} compact={true} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 6: MÉTODO DE TRABAJO EN 4 PASOS -->
+  <section class="py-16 md:py-24 bg-charcoal-900 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12">
+        <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+          Metodología del Estudio · Orden y Precisión
+        </p>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight mb-4">
+          Un proceso claro de principio a fin para que sepas exactamente qué esperar en cada etapa.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {workMethodSteps.map((item) => (
+          <div class="rounded-md border border-charcoal-750 bg-charcoal-950 p-6 sm:p-7 flex flex-col justify-between">
+            <div>
+              <span class="inline-block text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+                {item.stepLabel}
+              </span>
+              <h3 class="font-display font-bold text-xl text-ivory-50 mb-3 leading-snug">
+                {item.title}
+              </h3>
+              <p class="text-sm text-ivory-300 leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BLOQUE 7: PREGUNTAS FRECUENTES (FAQ) -->
+  <section class="py-16 md:py-24 bg-charcoal-950">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+          Claridad Comercial · Preguntas Frecuentes
+        </p>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight mb-3">
+          Respuestas directas sobre cómo trabajamos, cotizamos y dirigimos cada proyecto.
+        </h2>
+        <p class="text-base text-ivory-300">
+          Creemos en la transparencia desde el primer contacto: sin costos ocultos, sin paquetes genéricos y con alcances bien delimitados.
+        </p>
+      </div>
+
+      <FAQAccordion items={faqs} idPrefix="home-faq" />
+    </div>
+  </section>
+
+  <!-- BLOQUE 8: CIERRE DE CONVERSIÓN HACIA GOOGLE CALENDAR + WHATSAPP -->
+  <ConversionCalendarBlock
+    eyebrow="Agenda Abierta · Diagnóstico Inicial"
+    title="¿Listo para alinear tu imagen y tu contenido con el nivel real de tu trabajo?"
+    description="Reserva una videollamada de diagnóstico en Google Calendar para evaluar tu proyecto directamente con nosotros, o escríbenos por WhatsApp si prefieres iniciar la conversación por mensaje."
+    primaryCtaLabel="Agendar videollamada"
+    secondaryCtaLabel="Escribir por WhatsApp"
+    whatsappContext="inicio"
+  />
+</Layout>

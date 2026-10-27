@@ -1,0 +1,239 @@
+---
+import Icon from '../ui/Icon.astro';
+import { getWhatsAppUrl } from '../../data/siteConfig';
+
+const fallbackWhatsappUrl = getWhatsAppUrl('contacto');
+---
+
+<div class="rounded-md border border-charcoal-750 bg-charcoal-900 p-6 sm:p-8 lg:p-10">
+  <div class="mb-6">
+    <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-2">
+      Formulario breve · 3 campos
+    </p>
+    <h3 class="font-display font-bold text-2xl text-ivory-50">
+      Cuéntanos brevemente sobre tu proyecto
+    </h3>
+    <p class="text-sm text-ivory-300 mt-2">
+      Si prefieres dejar tus datos por escrito, completa estos tres campos esenciales y te responderemos con el siguiente paso recomendado.
+    </p>
+  </div>
+
+  <!-- Formulario de 3 campos estrictos (CA-CONV-05 / CA-ACC-01) -->
+  <form
+    id="contact-minimal-form"
+    novalidate
+    class="space-y-6"
+    data-whatsapp-base={fallbackWhatsappUrl}
+  >
+    <!-- Campo 1: Nombre -->
+    <div>
+      <label
+        for="contact-nombre"
+        class="block text-sm font-medium text-ivory-100 mb-2"
+      >
+        Nombre completo <span class="text-crimson-500" aria-hidden="true">*</span>
+      </label>
+      <input
+        type="text"
+        id="contact-nombre"
+        name="nombre"
+        required
+        autocomplete="name"
+        placeholder="Ej. Elena Morales"
+        aria-describedby="error-nombre"
+        aria-invalid="false"
+        class="w-full min-h-[48px] px-4 py-3 rounded-sm bg-charcoal-950 border border-charcoal-750 text-ivory-100 placeholder:text-slate-500 focus:outline-none focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 transition-colors"
+      />
+      <p
+        id="error-nombre"
+        role="alert"
+        class="hidden mt-2 text-xs text-danger font-medium"
+      >
+        Por favor ingresa tu nombre para saber a quién dirigirnos.
+      </p>
+    </div>
+
+    <!-- Campo 2: Teléfono o correo -->
+    <div>
+      <label
+        for="contact-medio"
+        class="block text-sm font-medium text-ivory-100 mb-2"
+      >
+        Teléfono (WhatsApp) o correo electrónico <span class="text-crimson-500" aria-hidden="true">*</span>
+      </label>
+      <input
+        type="text"
+        id="contact-medio"
+        name="contacto"
+        required
+        autocomplete="email"
+        placeholder="Ej. 222 123 4567 o nombre@empresa.com"
+        aria-describedby="error-medio"
+        aria-invalid="false"
+        class="w-full min-h-[48px] px-4 py-3 rounded-sm bg-charcoal-950 border border-charcoal-750 text-ivory-100 placeholder:text-slate-500 focus:outline-none focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 transition-colors"
+      />
+      <p
+        id="error-medio"
+        role="alert"
+        class="hidden mt-2 text-xs text-danger font-medium"
+      >
+        Por favor indica un número telefónico de al menos 10 dígitos o un correo electrónico válido.
+      </p>
+    </div>
+
+    <!-- Campo 3: Breve descripción del proyecto -->
+    <div>
+      <label
+        for="contact-descripcion"
+        class="block text-sm font-medium text-ivory-100 mb-2"
+      >
+        Breve descripción del proyecto <span class="text-crimson-500" aria-hidden="true">*</span>
+      </label>
+      <textarea
+        id="contact-descripcion"
+        name="descripcion"
+        rows="4"
+        required
+        placeholder="Cuéntanos qué servicio te interesa (Marca Personal, Contenido, Fotografía, Evento o Producción) y qué objetivo buscas..."
+        aria-describedby="error-descripcion"
+        aria-invalid="false"
+        class="w-full px-4 py-3 rounded-sm bg-charcoal-950 border border-charcoal-750 text-ivory-100 placeholder:text-slate-500 focus:outline-none focus:border-cobalt-500 focus:ring-1 focus:ring-cobalt-500 transition-colors resize-y"
+      ></textarea>
+      <p
+        id="error-descripcion"
+        role="alert"
+        class="hidden mt-2 text-xs text-danger font-medium"
+      >
+        Por favor comparte una breve descripción de tu proyecto (mínimo 10 caracteres).
+      </p>
+    </div>
+
+    <div class="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <button
+        type="submit"
+        data-track-cta="contact_form_submit"
+        data-track-location="contacto-form"
+        data-track-context="Enviar resumen del proyecto"
+        class="btn-primary w-full sm:w-auto justify-center"
+      >
+        <span>Enviar resumen del proyecto</span>
+        <Icon name="arrow-right" class="w-4 h-4" />
+      </button>
+
+      <p class="text-xs text-slate-400">
+        Tus datos están protegidos conforme a nuestro{' '}
+        <a href="/privacidad" class="text-ivory-300 underline hover:text-cobalt-400">
+          Aviso de Privacidad
+        </a>.
+      </p>
+    </div>
+  </form>
+
+  <!-- Estado de confirmación accesible -->
+  <div
+    id="contact-form-success"
+    role="status"
+    aria-live="polite"
+    class="hidden mt-6 p-6 rounded-sm border border-success/40 bg-charcoal-950 space-y-4"
+  >
+    <div class="flex items-start gap-3">
+      <div class="w-8 h-8 rounded-sm bg-success/15 border border-success/40 flex items-center justify-center text-success shrink-0">
+        <Icon name="check" class="w-4 h-4" />
+      </div>
+      <div>
+        <h4 class="font-display font-bold text-lg text-ivory-50">
+          Resumen preparado correctamente
+        </h4>
+        <p class="text-sm text-ivory-300 mt-1">
+          Hemos estructurado los datos de tu solicitud. Para atención inmediata mientras el buzón automatizado termina su vinculación de dominio, puedes enviar este mismo resumen en un clic por WhatsApp o pasar directo a la agenda.
+        </p>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-3 pt-2">
+      <a
+        id="contact-form-whatsapp-followup"
+        href={fallbackWhatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-track-cta="whatsapp_message"
+        data-track-location="contacto-form-confirmation"
+        class="btn-primary text-xs py-2.5 px-4"
+      >
+        <Icon name="message-circle" class="w-4 h-4" />
+        <span>Continuar con este mensaje en WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('contact-minimal-form') as HTMLFormElement | null;
+  const successBox = document.getElementById('contact-form-success');
+  const whatsappFollowup = document.getElementById('contact-form-whatsapp-followup') as HTMLAnchorElement | null;
+
+  if (form) {
+    const nombreInput = document.getElementById('contact-nombre') as HTMLInputElement | null;
+    const medioInput = document.getElementById('contact-medio') as HTMLInputElement | null;
+    const descInput = document.getElementById('contact-descripcion') as HTMLTextAreaElement | null;
+
+    const errorNombre = document.getElementById('error-nombre');
+    const errorMedio = document.getElementById('error-medio');
+    const errorDesc = document.getElementById('error-descripcion');
+
+    const setFieldError = (
+      input: HTMLInputElement | HTMLTextAreaElement | null,
+      errorEl: HTMLElement | null,
+      hasError: boolean
+    ) => {
+      if (!input || !errorEl) return;
+      input.setAttribute('aria-invalid', String(hasError));
+      errorEl.classList.toggle('hidden', !hasError);
+      input.classList.toggle('border-danger', hasError);
+    };
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const nombreVal = nombreInput?.value.trim() ?? '';
+      const medioVal = medioInput?.value.trim() ?? '';
+      const descVal = descInput?.value.trim() ?? '';
+
+      const isNombreValid = nombreVal.length >= 2;
+      const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(medioVal);
+      const isPhone = medioVal.replace(/\D/g, '').length >= 10;
+      const isMedioValid = isEmail || isPhone;
+      const isDescValid = descVal.length >= 10;
+
+      setFieldError(nombreInput, errorNombre, !isNombreValid);
+      setFieldError(medioInput, errorMedio, !isMedioValid);
+      setFieldError(descInput, errorDesc, !isDescValid);
+
+      if (!isNombreValid) {
+        nombreInput?.focus();
+        return;
+      }
+      if (!isMedioValid) {
+        medioInput?.focus();
+        return;
+      }
+      if (!isDescValid) {
+        descInput?.focus();
+        return;
+      }
+
+      const customText = `Hola, equipo de Cobalto Carmesí Studios. Mi nombre es ${nombreVal} (${medioVal}). Mi proyecto: ${descVal}`;
+      const baseWhatsapp = form.getAttribute('data-whatsapp-base') || 'https://api.whatsapp.com/send';
+      const urlObj = new URL(baseWhatsapp);
+      urlObj.searchParams.set('text', customText);
+
+      if (whatsappFollowup) {
+        whatsappFollowup.href = urlObj.toString();
+      }
+
+      if (successBox) {
+        successBox.classList.remove('hidden');
+      }
+    });
+  }
+</script>

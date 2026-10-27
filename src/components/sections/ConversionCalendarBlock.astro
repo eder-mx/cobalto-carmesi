@@ -1,0 +1,143 @@
+---
+import Icon from '../ui/Icon.astro';
+import {
+  siteConfig,
+  getCalendarUrl,
+  isExternalCalendarUrl,
+  getWhatsAppUrl,
+  getPhoneHref,
+  type WhatsAppContextKey,
+} from '../../data/siteConfig';
+
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  primaryCtaLabel?: string;
+  secondaryCtaLabel?: string;
+  whatsappContext?: WhatsAppContextKey;
+  customWhatsappMessage?: string;
+  calendarFallbackHref?: string;
+  sectionId?: string;
+}
+
+const {
+  eyebrow = 'Siguiente paso · Diagnóstico estratégico y creativo',
+  title = 'Construyamos una imagen y un contenido a la altura de lo que haces.',
+  description = 'Cada proyecto comienza con una conversación clara sobre tus objetivos, tu audiencia y el alcance real que necesitas. Agenda una videollamada de diagnóstico o escríbenos por WhatsApp para recibir orientación directa.',
+  primaryCtaLabel = 'Agendar videollamada',
+  secondaryCtaLabel = 'Escribir por WhatsApp',
+  whatsappContext = 'inicio',
+  customWhatsappMessage,
+  calendarFallbackHref = '/contacto#agendar',
+  sectionId = 'conversemos',
+} = Astro.props;
+
+const calendarHref = getCalendarUrl(calendarFallbackHref);
+const calendarIsExternal = isExternalCalendarUrl();
+const whatsappHref = getWhatsAppUrl(whatsappContext, customWhatsappMessage);
+const phoneHref = getPhoneHref();
+const hasPhoneConfirmed = siteConfig.integrations.phone.status !== 'POR_DEFINIR' && Boolean(siteConfig.integrations.phone.displayNumber);
+---
+
+<section
+  id={sectionId}
+  class="py-16 md:py-24 lg:py-28 bg-charcoal-950 border-t border-charcoal-750 relative overflow-hidden"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="relative rounded-md border border-charcoal-750 bg-charcoal-900 p-8 sm:p-10 lg:p-14 bg-crimson-spotlight overflow-hidden">
+      <!-- Sutil línea de acento superior -->
+      <div class="w-16 h-0.5 bg-cobalt-500 mb-6" aria-hidden="true"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+        <div class="lg:col-span-7 space-y-5">
+          <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+            {eyebrow}
+          </p>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl lg:text-[2.5rem] text-ivory-50 leading-[1.12] tracking-tight">
+            {title}
+          </h2>
+          <p class="text-base sm:text-lg text-ivory-300 leading-relaxed max-w-[62ch]">
+            {description}
+          </p>
+
+          <div class="pt-2 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-400">
+            <span class="inline-flex items-center gap-2">
+              <Icon name="clock" class="w-4 h-4 text-cobalt-400" />
+              {siteConfig.integrations.googleCalendar.durationLabel}
+            </span>
+            <span class="inline-flex items-center gap-2">
+              <Icon name="shield-check" class="w-4 h-4 text-cobalt-400" />
+              Propuesta a la medida · Sin paquetes rígidos
+            </span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 flex flex-col gap-4 bg-charcoal-950/90 border border-charcoal-750 p-6 sm:p-8 rounded-md">
+          <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-ivory-300">
+            Selecciona tu canal preferido
+          </p>
+
+          <!-- CTA Primario: Google Calendar (CA-CONV-01 / CA-CONV-02) -->
+          <a
+            href={calendarHref}
+            target={calendarIsExternal ? '_blank' : undefined}
+            rel={calendarIsExternal ? 'noopener noreferrer' : undefined}
+            data-track-cta="calendar_booking"
+            data-track-location={`conversion-block-${whatsappContext}`}
+            data-track-context={primaryCtaLabel}
+            class="btn-primary w-full justify-between group"
+          >
+            <span class="inline-flex items-center gap-2.5">
+              <Icon name="calendar" class="w-5 h-5" />
+              <span>{primaryCtaLabel}</span>
+            </span>
+            <Icon
+              name="arrow-up-right"
+              class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </a>
+
+          <!-- CTA Secundario: WhatsApp contextual (CA-CONV-01 / CA-CONV-04) -->
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track-cta="whatsapp_message"
+            data-track-location={`conversion-block-${whatsappContext}`}
+            data-track-context={secondaryCtaLabel}
+            class="btn-secondary w-full justify-between group"
+          >
+            <span class="inline-flex items-center gap-2.5">
+              <Icon name="message-circle" class="w-5 h-5 text-cobalt-400" />
+              <span>{secondaryCtaLabel}</span>
+            </span>
+            <Icon
+              name="arrow-up-right"
+              class="w-4 h-4 text-slate-400 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </a>
+
+          <!-- Tercer canal: Llamada telefónica (CA-CONV-01) -->
+          <div class="pt-3 mt-1 border-t border-charcoal-750 flex items-center justify-between text-xs text-slate-400">
+            <span>¿Prefieres atención telefónica?</span>
+            <a
+              href={phoneHref}
+              data-track-cta="phone_call"
+              data-track-location={`conversion-block-${whatsappContext}`}
+              data-track-context="Atención telefónica"
+              class="inline-flex items-center gap-1.5 font-medium text-ivory-100 hover:text-cobalt-400 transition-colors py-1"
+            >
+              <Icon name="phone" class="w-3.5 h-3.5 text-cobalt-400" />
+              <span>
+                {hasPhoneConfirmed
+                  ? siteConfig.integrations.phone.displayNumber
+                  : siteConfig.integrations.phone.fallbackLabel}
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

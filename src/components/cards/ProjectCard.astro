@@ -1,0 +1,156 @@
+---
+import Icon from '../ui/Icon.astro';
+import type { ProjectCase } from '../../data/projects';
+
+interface Props {
+  project: ProjectCase;
+  compact?: boolean;
+}
+
+const { project, compact = false } = Astro.props;
+
+const posterMap: Record<string, { src: string; width: number; height: number }> = {
+  'angie-mesta': {
+    src: '/media/portfolio/case-angie-mesta.svg',
+    width: 800,
+    height: 1000,
+  },
+  'h-centro-hidrofacial': {
+    src: '/media/portfolio/case-h-centro-hidrofacial.svg',
+    width: 1280,
+    height: 720,
+  },
+  durambene: {
+    src: '/media/portfolio/case-durambene.svg',
+    width: 800,
+    height: 1000,
+  },
+  'direccion-creativa-evolucion-estudio': {
+    src: '/media/portfolio/case-cobalto-evolucion.svg',
+    width: 1280,
+    height: 720,
+  },
+};
+
+const posterAsset = posterMap[project.slug] ?? {
+  src: '/media/portfolio/case-cobalto-evolucion.svg',
+  width: 1280,
+  height: 720,
+};
+---
+
+<article
+  data-project-card
+  data-category={project.category}
+  class="rounded-md border border-charcoal-750 bg-charcoal-900 overflow-hidden flex flex-col justify-between transition-colors duration-300 hover:border-cobalt-500/60"
+>
+  <div>
+    <!-- Póster visual en claroscuro con aspect-ratio fijo y lazy loading (CA-RESP-02 / CA-ACC-01) -->
+    <figure class="relative overflow-hidden border-b border-charcoal-750 bg-charcoal-950 aspect-[16/10]">
+      <img
+        src={posterAsset.src}
+        alt={project.visualPoster.alt}
+        width={posterAsset.width}
+        height={posterAsset.height}
+        loading="lazy"
+        decoding="async"
+        class="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-charcoal-950 via-charcoal-950/35 to-transparent pointer-events-none"></div>
+
+      <div class="absolute top-4 left-4 right-4 flex flex-wrap items-center justify-between gap-2">
+        <span class="px-3 py-1 rounded-sm bg-charcoal-950/90 border border-charcoal-750 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+          {project.category}
+        </span>
+        <span class="px-2.5 py-1 rounded-sm bg-charcoal-950/85 border border-charcoal-750 text-[11px] font-sans text-ivory-300">
+          Caso Real Documentado
+        </span>
+      </div>
+
+      <figcaption class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs text-ivory-300">
+        <span>{project.visualPoster.caption}</span>
+      </figcaption>
+    </figure>
+
+    <!-- Cabecera del caso -->
+    <div class="p-6 md:p-8">
+      <div class="flex flex-wrap gap-2 mb-3">
+        {project.secondaryTags.map((tag) => (
+          <span class="text-xs font-sans text-slate-400 bg-charcoal-850 border border-charcoal-750 px-2.5 py-0.5 rounded-sm">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <h3 class="font-display font-bold text-xl sm:text-2xl text-ivory-50 leading-snug mb-6">
+        {project.title}
+      </h3>
+
+      <!-- Estructura narrativa obligatoria de 5 puntos (CA-PORT-01) -->
+      <dl class="space-y-4 text-sm border-t border-charcoal-750 pt-5">
+        <div>
+          <dt class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-1">
+            Contexto
+          </dt>
+          <dd class="text-ivory-300 leading-relaxed">{project.narrative.contexto}</dd>
+        </div>
+
+        <div>
+          <dt class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-1">
+            Necesidad
+          </dt>
+          <dd class="text-ivory-300 leading-relaxed">{project.narrative.necesidad}</dd>
+        </div>
+
+        <div>
+          <dt class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-1">
+            Alcance real ejecutado
+          </dt>
+          <dd class="text-ivory-300 leading-relaxed">{project.narrative.alcanceEjecutado}</dd>
+        </div>
+
+        {!compact && (
+          <>
+            <div>
+              <dt class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-1">
+                Aportación del estudio
+              </dt>
+              <dd class="text-ivory-300 leading-relaxed">{project.narrative.aportacionEstudio}</dd>
+            </div>
+
+            <div>
+              <dt class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-1">
+                Muestra visual y entregables
+              </dt>
+              <dd class="text-ivory-300 leading-relaxed">{project.narrative.muestraVisual}</dd>
+            </div>
+          </>
+        )}
+      </dl>
+    </div>
+  </div>
+
+  <div class="px-6 md:px-8 py-4 border-t border-charcoal-750 bg-charcoal-950/50 flex items-center justify-between">
+    <span class="text-xs text-slate-400">Cliente: <strong class="text-ivory-100 font-medium">{project.clientLabel}</strong></span>
+    {compact ? (
+      <a
+        href={`/proyectos#${project.slug}`}
+        class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-cobalt-400 hover:text-ivory-50 transition-colors py-1"
+      >
+        <span>Ver desglose completo</span>
+        <Icon name="arrow-right" class="w-4 h-4" />
+      </a>
+    ) : (
+      <a
+        href="/contacto#agendar"
+        data-track-cta="calendar_booking"
+        data-track-location={`project-card-${project.slug}`}
+        data-track-context={`Proyecto similar a ${project.clientLabel}`}
+        class="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-cobalt-400 hover:text-ivory-50 transition-colors py-1"
+      >
+        <span>Cotizar alcance similar</span>
+        <Icon name="arrow-up-right" class="w-4 h-4" />
+      </a>
+    )}
+  </div>
+</article>

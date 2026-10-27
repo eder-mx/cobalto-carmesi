@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" fill="none">
+  <defs>
+    <radialGradient id="cobaltGlow" cx="65%" cy="32%" r="60%">
+      <stop offset="0%" stop-color="#1E4ED8" stop-opacity="0.45"/>
+      <stop offset="55%" stop-color="#14328C" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#090B10" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="crimsonRim" cx="25%" cy="78%" r="45%">
+      <stop offset="0%" stop-color="#9E1B32" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#090B10" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="archFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#222A3A" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#3B6EF6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#11151E" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="#090B10"/>
+  <rect width="800" height="1000" fill="url(#cobaltGlow)"/>
+  <rect width="800" height="1000" fill="url(#crimsonRim)"/>
+  <!-- Architectural Chiaroscuro Grid -->
+  <line x1="120" y1="0" x2="120" y2="1000" stroke="#222A3A" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="680" y1="0" x2="680" y2="1000" stroke="#222A3A" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="0" y1="180" x2="800" y2="180" stroke="#222A3A" stroke-width="1" stroke-opacity="0.5"/>
+  <line x1="0" y1="820" x2="800" y2="820" stroke="#222A3A" stroke-width="1" stroke-opacity="0.5"/>
+  <!-- Editorial Portrait Frame Study -->
+  <rect x="180" y="210" width="440" height="580" stroke="url(#archFrame)" stroke-width="1.5" fill="#11151E" fill-opacity="0.45"/>
+  <circle cx="400" cy="430" r="135" stroke="#3B6EF6" stroke-width="1.2" stroke-opacity="0.55" fill="#14328C" fill-opacity="0.15"/>
+  <path d="M275 730 C275 610 525 610 525 730" stroke="#F4F5F8" stroke-width="1.5" stroke-opacity="0.35" fill="none"/>
+  <line x1="220" y1="250" x2="290" y2="250" stroke="#C8233F" stroke-width="2"/>
+</svg>

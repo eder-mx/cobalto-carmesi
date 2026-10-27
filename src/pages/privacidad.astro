@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { siteConfig } from '../data/siteConfig';
+---
+
+<Layout
+  title="Aviso de Privacidad | Cobalto Carmesí Studios"
+  description="Aviso de privacidad y política de tratamiento de datos personales de Cobalto Carmesí Studios para prospectos, clientes y usuarios del sitio web."
+  canonicalPath="/privacidad"
+  whatsappContext="contacto"
+>
+  <section class="py-16 sm:py-24 bg-charcoal-950 border-b border-charcoal-750">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10 pb-8 border-b border-charcoal-750">
+        <span class="inline-flex items-center px-3 py-1 rounded-sm bg-charcoal-900 border border-charcoal-750 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-4">
+          Transparencia y Protección de Datos
+        </span>
+        <h1 class="font-display font-bold text-3xl sm:text-5xl text-ivory-50 leading-tight">
+          Aviso de Privacidad Simplificado e Integral
+        </h1>
+        <p class="text-sm text-slate-400 mt-3">
+           {siteConfig.brand.name} · {siteConfig.brand.legalTransitionNote}
+        </p>
+      </div>
+
+      <!-- Contenido Legal estructurado conforme a CA-LEGAL-01 y CA-LEGAL-02 (Cero domicilio particular) -->
+      <div class="space-y-8 text-base text-ivory-300 leading-relaxed">
+        <section class="space-y-3">
+          <h2 class="font-display font-bold text-2xl text-ivory-50">
+            1. Identidad del responsable del tratamiento
+          </h2>
+          <p>
+            <strong class="text-ivory-50 font-medium">Cobalto Carmesí Studios</strong> (evolución comercial y creativa de <em>Sefirot</em>), bajo la Dirección Creativa de <strong class="text-ivory-50 font-medium">{siteConfig.brand.creativeDirector.name}</strong>, con operación comercial en {siteConfig.brand.locationScope}, es responsable del uso, resguardo y protección de los datos personales recabados a través de este sitio web y de sus canales oficiales de contacto y agendamiento.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="font-display font-bold text-2xl text-ivory-50">
+            2. Datos personales que recabamos
+          </h2>
+          <p>
+            Para llevar a cabo las finalidades descritas en el presente aviso de privacidad, recabamos únicamente los datos estrictamente necesarios que el titular nos proporciona de forma voluntaria a través de nuestro formulario de contacto de tres campos, agendamiento de videollamadas en Google Calendar o conversación iniciada vía WhatsApp:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-ivory-300">
+            <li>Nombre completo o nombre comercial de contacto.</li>
+            <li>Número telefónico (WhatsApp) y/o dirección de correo electrónico.</li>
+            <li>Breve descripción del proyecto, servicio de interés y requerimientos de producción o consultoría.</li>
+          </ul>
+          <p>
+            Cobalto Carmesí Studios no solicita ni recaba datos personales sensibles a través de su sitio web informativo.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="font-display font-bold text-2xl text-ivory-50">
+            3. Finalidades del tratamiento de sus datos
+          </h2>
+          <p>
+            Los datos personales que recabamos se utilizan exclusivamente para las siguientes finalidades primarias:
+          </p>
+          <ul class="list-disc pl-6 space-y-2 text-ivory-300">
+            <li>Programar, confirmar y dar seguimiento a videollamadas de diagnóstico y reuniones de trabajo.</li>
+            <li>Brindar atención consultiva, resolver dudas sobre el alcance de nuestros servicios y elaborar propuestas o cotizaciones a la medida.</li>
+            <li>Mantener comunicación operativa durante la planeación, producción y entrega de proyectos contratados.</li>
+          </ul>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="font-display font-bold text-2xl text-ivory-50">
+            4. Uso de herramientas de terceros y medición
+          </h2>
+          <p>
+            Este sitio web puede integrar enlaces o herramientas de programación de citas (como Google Calendar / Google Meet) y mensajería directa (WhatsApp), los cuales operan bajo sus propias políticas de privacidad y seguridad tecnológica. Asimismo, utilizamos medición analítica de eventos de interacción (como clics en botones de contacto) con fines estrictamente estadísticos y de mejora continua de la experiencia del usuario, sin comercializar ni transferir información personal a terceros ajenos al estudio.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="font-display font-bold text-2xl text-ivory-50">
+            5. Derechos ARCO (Acceso, Rectificación, Cancelación y Oposición)
+          </h2>
+          <p>
+            Como titular de sus datos personales, usted tiene derecho a conocer qué datos tenemos de usted, para qué los utilizamos y las condiciones del uso que les damos (Acceso); solicitar la corrección de su información personal en caso de que esté desactualizada o inexacta (Rectificación); solicitar que la eliminemos de nuestros registros de prospectos cuando considere que no está siendo utilizada adecuadamente (Cancelación); así como oponerse al uso de sus datos personales para fines específicos (Oposición).
+          </p>
+          <p>
+            Para ejercer cualquiera de los derechos ARCO o revocar su consentimiento, puede enviar su solicitud directamente a través de nuestros canales oficiales disponibles en la sección de{' '}
+            <a href="/contacto" class="text-cobalt-400 underline hover:text-ivory-50">
+              Contacto y Agenda
+            </a>.
+          </p>
+        </section>
+
+        <section class="space-y-3">
+          <h2 class="font-display font-bold text-2xl text-ivory-50">
+            6. Actualizaciones al presente Aviso de Privacidad
+          </h2>
+          <p>
+            El presente aviso de privacidad puede sufrir modificaciones o actualizaciones derivadas de nuevos requerimientos legales o de la evolución de nuestros servicios creativos y de consultoría. Cualquier cambio será publicado directamente en esta página web (`https://cobaltocarmesi.com/privacidad`).
+          </p>
+        </section>
+      </div>
+    </div>
+  </section>
+</Layout>

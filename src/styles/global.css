@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Cabinet Grotesk';
+  src: url('/fonts/CabinetGrotesk-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Variable.woff2') format('woff2-variations');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-VariableItalic.woff2') format('woff2-variations');
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}
+
+:root {
+  /* Superficies y Fondos (Claroscuro) */
+  --bg-canvas: #06080D;
+  --bg-surface: #0A0D14;
+  --bg-surface-elevated: #10141E;
+  --bg-surface-interactive: #171C28;
+  --bg-paper-editorial: #F4F4F0;
+
+  /* Texto */
+  --text-primary: #FBFBFA;
+  --text-secondary: #CFD4DC;
+  --text-muted: #8893A6;
+  --text-on-paper: #0A0D14;
+  --text-on-paper-muted: #515A6B;
+
+  /* Acentos de Marca */
+  --accent-cobalt: #0047AB;
+  --accent-cobalt-hover: #2B74FF;
+  --accent-cobalt-light: #599CFF;
+  --accent-crimson: #B22222;
+  --accent-crimson-hover: #E04B4B;
+
+  /* Bordes y Divisores Arquitectónicos (1px Hairlines) */
+  --border-subtle: #1F2637;
+  --border-strong: #3D4452;
+  --border-cobalt: rgba(43, 116, 255, 0.45);
+  --border-crimson: rgba(178, 34, 34, 0.50);
+
+  /* Estados Semánticos */
+  --state-focus-ring: #599CFF;
+  --state-success: #10B981;
+  --state-warning: #F59E0B;
+  --state-error: #EF4444;
+}
+
+@layer base {
+  html {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: 'Satoshi', system-ui, -apple-system, sans-serif;
+    scroll-behavior: smooth;
+    color-scheme: dark;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    @apply bg-charcoal-950 text-paper-bone font-sans antialiased selection:bg-cobalt-600 selection:text-paper-pure;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Cabinet Grotesk', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Focus ring de alta visibilidad accesible por teclado */
+  :focus-visible {
+    outline: 2px solid var(--state-focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .bg-chiaroscuro-hero {
+    background:
+      radial-gradient(circle at 78% 24%, rgba(0, 71, 171, 0.24) 0%, rgba(6, 8, 13, 0) 55%),
+      radial-gradient(circle at 18% 82%, rgba(178, 34, 34, 0.10) 0%, rgba(6, 8, 13, 0) 45%),
+      linear-gradient(180deg, #06080D 0%, #0A0D14 100%);
+  }
+
+  .bg-cobalt-spotlight {
+    background: radial-gradient(circle at 50% 0%, rgba(0, 71, 171, 0.18) 0%, rgba(10, 13, 20, 0) 70%);
+  }
+
+  .editorial-kicker {
+    @apply inline-flex items-center gap-3 font-sans text-xs font-semibold uppercase tracking-[0.14em] text-cobalt-300;
+  }
+
+  .editorial-kicker::before {
+    content: '';
+    @apply inline-block h-[1px] w-6 bg-crimson-600 shrink-0;
+  }
+}

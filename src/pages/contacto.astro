@@ -1,0 +1,254 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/ui/Icon.astro';
+import ContactFormMinimal from '../components/forms/ContactFormMinimal.astro';
+import FAQAccordion from '../components/ui/FAQAccordion.astro';
+import {
+  siteConfig,
+  getCalendarUrl,
+  isExternalCalendarUrl,
+  getWhatsAppUrl,
+  getPhoneHref,
+} from '../data/siteConfig';
+import { faqs } from '../data/faqs';
+
+const calendarHref = getCalendarUrl('#agendar');
+const calendarExternal = isExternalCalendarUrl();
+const hasEmbedCalendar = Boolean(
+  siteConfig.integrations.googleCalendar.embedUrl &&
+    siteConfig.integrations.googleCalendar.embedUrl.trim().length > 0
+);
+const whatsappHref = getWhatsAppUrl('contacto');
+const phoneHref = getPhoneHref();
+const hasPhoneConfirmed =
+  siteConfig.integrations.phone.status !== 'POR_DEFINIR' &&
+  Boolean(siteConfig.integrations.phone.displayNumber);
+
+const diagnosticSteps = [
+  'Conocemos el contexto actual de tu marca, empresa, perfil profesional o evento.',
+  'Definimos qué objetivo buscas resolver (posicionamiento, contenido continuo, banco fotográfico o cobertura).',
+  'Establecemos los requerimientos de dirección creativa, tiempos y alcances de producción.',
+  'Te entregamos una propuesta clara y hecha a la medida, sin costos ocultos ni paquetes genéricos.',
+];
+---
+
+<Layout
+  title="Contacto y Agenda de Diagnóstico | Cobalto Carmesí Studios"
+  description="Agenda una videollamada de diagnóstico en Google Calendar, escríbenos por WhatsApp o envíanos los detalles de tu proyecto en Cobalto Carmesí Studios."
+  canonicalPath="/contacto"
+  whatsappContext="contacto"
+>
+  <!-- HERO DE CONTACTO Y AGENDA -->
+  <section class="py-16 sm:py-20 bg-charcoal-950 bg-cobalt-chiaroscuro border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-5">
+        <span class="inline-flex items-center px-3 py-1 rounded-sm bg-charcoal-900 border border-charcoal-750 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+          Atención Consultiva · Cero Fricción
+        </span>
+
+        <h1 class="font-display font-bold text-4xl sm:text-5xl text-ivory-50 leading-[1.08] tracking-tight">
+          Iniciemos la conversación sobre tu proyecto.
+        </h1>
+
+        <p class="text-lg sm:text-xl text-ivory-300 leading-relaxed">
+          Elige la vía más cómoda para ti: agenda directamente una videollamada de diagnóstico, escríbenos por WhatsApp con respuesta ágil o déjanos un resumen en tres campos.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN PRINCIPAL: VÍA RÁPIDA (GOOGLE CALENDAR + WHATSAPP + TELÉFONO) + FORMULARIO 3 CAMPOS -->
+  <section id="agendar" class="py-16 md:py-24 bg-charcoal-950 border-b border-charcoal-750 scroll-mt-20">
+    <div id="agenda" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+        <!-- Columna Izquierda (7 cols): Agenda de Videollamada y Canales Directos -->
+        <div class="lg:col-span-7 space-y-8">
+          <!-- Tarjeta Protagonista: Google Calendar (CA-CONV-01 / CA-CONV-02 / CA-CONV-03) -->
+          <div class="rounded-md border border-charcoal-750 bg-charcoal-900 p-6 sm:p-8 lg:p-10 bg-cobalt-chiaroscuro">
+            <div class="flex items-center justify-between gap-4 mb-4">
+              <span class="px-3 py-1 rounded-sm bg-cobalt-900/40 border border-cobalt-600/40 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+                Vía Principal Recomendada · Google Calendar
+              </span>
+              <Icon name="calendar" class="w-6 h-6 text-cobalt-400 shrink-0" />
+            </div>
+
+            <h2 class="font-display font-bold text-2xl sm:text-3xl text-ivory-50 mb-3">
+              Videollamada de Diagnóstico Estratégico y Creativo
+            </h2>
+
+            <p class="text-sm sm:text-base text-ivory-300 leading-relaxed mb-6">
+              Una sesión de 30 a 45 minutos por Google Meet para analizar tu necesidad sin compromiso, orientarte sobre el enfoque ideal y estructurar una propuesta a tu medida.
+            </p>
+
+            <!-- Qué revisamos en la llamada -->
+            <div class="border-t border-charcoal-750 pt-5 mb-6">
+              <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-slate-400 mb-3">
+                ¿Qué logramos en esta primera sesión?
+              </p>
+              <ul class="space-y-2.5">
+                {diagnosticSteps.map((step) => (
+                  <li class="flex items-start gap-2.5 text-sm text-ivory-300">
+                    <Icon name="check" class="w-4 h-4 text-cobalt-400 shrink-0 mt-0.5" />
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {hasEmbedCalendar ? (
+              <div class="rounded-sm overflow-hidden border border-charcoal-750 bg-charcoal-950 min-h-[520px]">
+                <iframe
+                  src={siteConfig.integrations.googleCalendar.embedUrl}
+                  title="Agenda de videollamadas en Google Calendar de Cobalto Carmesí Studios"
+                  class="w-full h-[560px] border-0"
+                  loading="lazy"
+                ></iframe>
+              </div>
+            ) : (
+              <div class="rounded-sm border border-charcoal-750 bg-charcoal-950 p-6 space-y-4">
+                <div class="flex items-center gap-2.5 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+                  <Icon name="clock" class="w-4 h-4" />
+                  <span>Coordinación de Horario en Google Meet</span>
+                </div>
+                <p class="text-sm text-ivory-300 leading-relaxed">
+                  Selecciona tu solicitud de videollamada o indícanos tu disponibilidad preferida (mañana o tarde) por WhatsApp o en el formulario contiguo para enviarte la invitación directa de Google Calendar.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                  {calendarExternal ? (
+                    <a
+                      href={calendarHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-track-cta="calendar_booking"
+                      data-track-location="contacto-calendar-card"
+                      data-track-context="Abrir Google Calendar externo"
+                      class="btn-primary justify-center"
+                    >
+                      <Icon name="calendar" class="w-4 h-4" />
+                      <span>Seleccionar fecha en Google Calendar</span>
+                    </a>
+                  ) : (
+                    <a
+                      href={ getWhatsAppUrl('contacto', 'Hola, equipo de Cobalto Carmesí Studios. Me gustaría agendar una videollamada de diagnóstico en Google Calendar. ¿Qué horarios tienen disponibles esta semana?') }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-track-cta="calendar_booking"
+                      data-track-location="contacto-calendar-card"
+                      data-track-context="Solicitar horario de videollamada"
+                      class="btn-primary justify-center"
+                    >
+                      <Icon name="calendar" class="w-4 h-4" />
+                      <span>Solicitar horario de videollamada</span>
+                    </a>
+                  )}
+
+                  <a
+                    href="#contact-minimal-form"
+                    data-track-cta="calendar_booking_form_anchor"
+                    data-track-location="contacto-calendar-card"
+                    class="btn-secondary justify-center"
+                  >
+                    <span>Dejar mis datos en el formulario</span>
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <!-- Canales Directos Complementarios: WhatsApp + Llamada Telefónica -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <!-- Tarjeta WhatsApp -->
+            <div class="rounded-md border border-charcoal-750 bg-charcoal-900 p-6 flex flex-col justify-between">
+              <div>
+                <div class="w-10 h-10 rounded-sm bg-charcoal-850 border border-charcoal-750 flex items-center justify-center text-cobalt-400 mb-4">
+                  <Icon name="message-circle" class="w-5 h-5" />
+                </div>
+                <h3 class="font-display font-bold text-xl text-ivory-50 mb-2">
+                  Atención por WhatsApp
+                </h3>
+                <p class="text-sm text-ivory-300 leading-relaxed mb-5">
+                  Ideal para consultas rápidas, verificar disponibilidad de fechas de eventos o iniciar la conversación por mensaje.
+                </p>
+              </div>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track-cta="whatsapp_message"
+                data-track-location="contacto-direct-card"
+                data-track-context="Iniciar chat en WhatsApp"
+                class="btn-secondary w-full justify-center"
+              >
+                <Icon name="message-circle" class="w-4 h-4 text-cobalt-400" />
+                <span>Escribir por WhatsApp</span>
+              </a>
+            </div>
+
+            <!-- Tarjeta Llamada Telefónica -->
+            <div
+              id="llamada-directa"
+              class="rounded-md border border-charcoal-750 bg-charcoal-900 p-6 flex flex-col justify-between scroll-mt-24"
+            >
+              <div>
+                <div class="w-10 h-10 rounded-sm bg-charcoal-850 border border-charcoal-750 flex items-center justify-center text-cobalt-400 mb-4">
+                  <Icon name="phone" class="w-5 h-5" />
+                </div>
+                <h3 class="font-display font-bold text-xl text-ivory-50 mb-2">
+                  Llamada Telefónica
+                </h3>
+                <p class="text-sm text-ivory-300 leading-relaxed mb-5">
+                  Si prefieres conversar por vía telefónica tradicional, solicita o realiza una llamada directa con Dirección Creativa.
+                </p>
+              </div>
+              {hasPhoneConfirmed ? (
+                <a
+                  href={phoneHref}
+                  data-track-cta="phone_call"
+                  data-track-location="contacto-phone-card"
+                  data-track-context="Llamar por teléfono"
+                  class="btn-secondary w-full justify-center"
+                >
+                  <Icon name="phone" class="w-4 h-4 text-cobalt-400" />
+                  <span>{siteConfig.integrations.phone.displayNumber}</span>
+                </a>
+              ) : (
+                <a
+                  href={getWhatsAppUrl('contacto', 'Hola, equipo de Cobalto Carmesí Studios. Prefiero atención vía llamada telefónica para platicar sobre mi proyecto. ¿A qué hora podemos comunicarnos?')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track-cta="phone_call"
+                  data-track-location="contacto-phone-card"
+                  data-track-context="Coordinar llamada telefónica"
+                  class="btn-secondary w-full justify-center"
+                >
+                  <Icon name="phone" class="w-4 h-4 text-cobalt-400" />
+                  <span>Coordinar llamada telefónica</span>
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <!-- Columna Derecha (5 cols): Formulario Mínimo de 3 Campos (CA-CONV-05) -->
+        <div class="lg:col-span-5">
+          <ContactFormMinimal />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREGUNTAS FRECUENTES EN CONTACTO -->
+  <section class="py-16 md:py-24 bg-charcoal-900">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-10">
+        <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+          Dudas Frecuentes Antes de Agendar
+        </p>
+        <h2 class="font-display font-bold text-3xl text-ivory-50 leading-tight">
+          Todo lo que necesitas saber antes de nuestra primera conversación.
+        </h2>
+      </div>
+      <FAQAccordion items={faqs} idPrefix="contacto-faq" />
+    </div>
+  </section>
+</Layout>

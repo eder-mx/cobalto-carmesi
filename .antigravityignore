@@ -1,0 +1,30 @@
+# Dependencias y artefactos de compilación
+node_modules/
+dist/
+dist-ssr/
+.astro/
+.vite/
+.git/
+
+# Lockfiles extensos
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Binarios pesados y fuentes compiladas (no requieren indexación de texto)
+*.woff
+*.woff2
+*.ttf
+*.otf
+*.mp4
+*.webm
+*.mov
+*.zip
+
+# Archivos de sistema y entorno
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log

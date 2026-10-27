@@ -1,0 +1,274 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/ui/Icon.astro';
+import ConversionCalendarBlock from '../components/sections/ConversionCalendarBlock.astro';
+import {
+  getCalendarUrl,
+  isExternalCalendarUrl,
+  getWhatsAppUrl,
+} from '../data/siteConfig';
+import { projects } from '../data/projects';
+
+const calendarHref = getCalendarUrl('/contacto#agendar');
+const calendarExternal = isExternalCalendarUrl();
+const whatsappHref = getWhatsAppUrl('marca-personal');
+const angieCase = projects.find((p) => p.slug === 'angie-mesta');
+
+const pillars = [
+  {
+    title: 'Diagnóstico de Identidad y Posicionamiento',
+    description:
+      'Auditamos qué comunica hoy tu presencia digital frente a tu trayectoria real, identificando brechas de percepción, oportunidades de autoridad y el territorio narrativo que debes ocupar.',
+    icon: 'compass' as const,
+  },
+  {
+    title: 'Arquitectura de Mensaje y Narrativa',
+    description:
+      'Definimos tus ejes temáticos, tono de voz, postura profesional y estructura de discurso para que comuniques con solvencia ante clientes, colegas y audiencias clave.',
+    icon: 'layers' as const,
+  },
+  {
+    title: 'Dirección de Imagen y Retrato Editorial',
+    description:
+      'Producimos fotografías de retrato con iluminación de estudio o locación controlada y dirigimos tu expresión frente a cámara para construir un banco visual propio y memorable.',
+    icon: 'camera' as const,
+  },
+  {
+    title: 'Sistema de Contenido y Presencia Sostenible',
+    description:
+      'Traducimos tu estrategia en piezas audiovisuales y lineamientos claros para que tu presencia digital mantenga coherencia estética sin depender de fórmulas genéricas.',
+    icon: 'film' as const,
+  },
+];
+
+const profiles = [
+  'Médicos especialistas, cirujanos, odontólogos y profesionales de la salud que buscan transmitir confianza ética y rigor.',
+  'Abogados, arquitectos, consultores financieros y socios de firmas que necesitan respaldo reputacional.',
+  'Directivos, fundadores de empresas y líderes de negocio que son el rostro público de su organización.',
+  'Académicos, conferencistas, autores y perfiles creativos que desean consolidar una voz propia y reconocible.',
+];
+---
+
+<Layout
+  title="Consultoría y Gestión de Marca Personal | Cobalto Carmesí Studios"
+  description="Construcción estratégica de posicionamiento, narrativa, dirección de imagen y presencia audiovisual para profesionistas, directivos, especialistas y líderes."
+  canonicalPath="/marca-personal"
+  whatsappContext="marca-personal"
+>
+  <!-- HERO DE SERVICIO PRIORITARIO 1 -->
+  <section class="py-16 sm:py-24 bg-charcoal-950 bg-cobalt-chiaroscuro border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-6">
+        <span class="inline-flex items-center px-3 py-1 rounded-sm bg-cobalt-900/40 border border-cobalt-600/40 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+          Servicio Prioritario · Consultoría, Narrativa e Imagen
+        </span>
+
+        <h1 class="font-display font-bold text-4xl sm:text-5xl text-ivory-50 leading-[1.08] tracking-tight">
+          Consultoría y Gestión de Marca Personal para perfiles que lideran con criterio.
+        </h1>
+
+        <p class="text-lg sm:text-xl text-ivory-300 leading-relaxed">
+          Construimos el posicionamiento, la narrativa verbal y el universo visual de profesionistas, especialistas y directivos cuya trayectoria real merece una presencia pública a su misma altura.
+        </p>
+
+        <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <a
+            href={calendarHref}
+            target={calendarExternal ? '_blank' : undefined}
+            rel={calendarExternal ? 'noopener noreferrer' : undefined}
+            data-track-cta="calendar_booking"
+            data-track-location="marca-personal-hero"
+            data-track-context="Agendar diagnóstico de marca personal"
+            class="btn-primary justify-center"
+          >
+            <Icon name="calendar" class="w-5 h-5" />
+            <span>Agendar diagnóstico de marca personal</span>
+          </a>
+
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track-cta="whatsapp_message"
+            data-track-location="marca-personal-hero"
+            data-track-context="Consultar por WhatsApp"
+            class="btn-secondary justify-center"
+          >
+            <Icon name="message-circle" class="w-5 h-5 text-cobalt-400" />
+            <span>Escribir por WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMA QUE RESUELVE & ENFOQUE -->
+  <section class="py-16 md:py-24 bg-charcoal-900 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-6 space-y-5">
+          <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+            El desafío de la reputación digital
+          </p>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight">
+            Tener prestigio en el mundo presencial ya no basta si tu huella digital transmite duda o desconexión.
+          </h2>
+          <p class="text-base text-ivory-300 leading-relaxed">
+            Antes de agendar una consulta, firmar un contrato o invitarte a un proyecto, tus futuros clientes investigan quién eres. Cuando encuentran perfiles desactualizados, fotografías improvisadas o mensajes confusos, el valor percibido de tu trabajo disminuye.
+          </p>
+          <p class="text-base text-ivory-300 leading-relaxed">
+            Nuestra consultoría no busca convertirte en un personaje artificial ni obligarte a seguir tendencias vacías. Trabajamos contigo para destilar tu voz auténtica, estructurar tu discurso y respaldarlo con dirección fotográfica y audiovisual de primer nivel.
+          </p>
+        </div>
+
+        <div class="lg:col-span-6 rounded-md border border-charcoal-750 bg-charcoal-950 p-6 sm:p-8">
+          <h3 class="font-display font-bold text-xl text-ivory-50 mb-4">
+            ¿Para quién está diseñada esta línea prioritaria?
+          </h3>
+          <ul class="space-y-4">
+            {profiles.map((profile) => (
+              <li class="flex items-start gap-3 text-sm sm:text-base text-ivory-300">
+                <Icon name="check" class="w-5 h-5 text-cobalt-400 shrink-0 mt-0.5" />
+                <span>{profile}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILARES DE LA CONSULTORÍA -->
+  <section class="py-16 md:py-24 bg-charcoal-950 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12">
+        <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+          Metodología y Entregables
+        </p>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight">
+          Cuatro pilares para estructurar tu presencia con solidez intelectual y visual.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        {pillars.map((pillar) => (
+          <div class="rounded-md border border-charcoal-750 bg-charcoal-900 p-6 sm:p-8">
+            <div class="w-10 h-10 rounded-sm bg-charcoal-850 border border-charcoal-750 flex items-center justify-center text-cobalt-400 mb-5">
+              <Icon name={pillar.icon} class="w-5 h-5" />
+            </div>
+            <h3 class="font-display font-bold text-xl text-ivory-50 mb-3">
+              {pillar.title}
+            </h3>
+            <p class="text-sm sm:text-base text-ivory-300 leading-relaxed">
+              {pillar.description}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <!-- Caso de referencia real vinculado -->
+      {angieCase && (
+        <div class="mt-12 rounded-md border border-charcoal-750 bg-charcoal-900 p-6 sm:p-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-2xl">
+            <span class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+              Caso Real Relacionado · {angieCase.clientLabel}
+            </span>
+            <h3 class="font-display font-bold text-xl text-ivory-50">
+              {angieCase.title}
+            </h3>
+            <p class="text-sm text-ivory-300 leading-relaxed">
+              {angieCase.narrative.aportacionEstudio}
+            </p>
+          </div>
+          <a href="/proyectos#angie-mesta" class="btn-secondary shrink-0">
+            <span>Ver caso en Portafolio</span>
+            <Icon name="arrow-right" class="w-4 h-4" />
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- SUBSECCIÓN ANCLADA: FORMACIÓN, MENTORÍA Y CAPACITACIÓN CREATIVA (SERVICIO G) -->
+  <section id="formacion-y-mentoria" class="py-16 md:py-24 bg-charcoal-900 border-b border-charcoal-750 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-md border border-charcoal-750 bg-charcoal-950 p-8 sm:p-10 lg:p-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7 space-y-5">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-charcoal-900 border border-charcoal-750 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+              <Icon name="award" class="w-4 h-4" />
+              <span>Línea Complementaria · Transferencia de Criterio</span>
+            </span>
+
+            <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight">
+              Formación, Mentoría y Capacitación Creativa para Personas y Equipos.
+            </h2>
+
+            <p class="text-base text-ivory-300 leading-relaxed">
+              Además de desarrollar proyectos llave en mano, en Cobalto Carmesí Studios formamos a profesionistas que desean comunicar con mayor seguridad frente a cámara y capacitamos a equipos internos de comunicación para que eleven su estándar técnico y narrativo.
+            </p>
+
+            <ul class="space-y-3 pt-2">
+              <li class="flex items-start gap-2.5 text-sm text-ivory-300">
+                <Icon name="check" class="w-4 h-4 text-cobalt-400 shrink-0 mt-0.5" />
+                <span>Entrenamiento personalizado en expresión frente a cámara, dicción, postura y estructura de mensaje.</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-sm text-ivory-300">
+                <Icon name="check" class="w-4 h-4 text-cobalt-400 shrink-0 mt-0.5" />
+                <span>Talleres prácticos de iluminación, encuadre, captura de audio y flujo de producción audiovisual.</span>
+              </li>
+              <li class="flex items-start gap-2.5 text-sm text-ivory-300">
+                <Icon name="check" class="w-4 h-4 text-cobalt-400 shrink-0 mt-0.5" />
+                <span>Mentoría directa con Darío Ilescas Cruz sobre piezas reales de tu marca o proyecto.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="lg:col-span-5 bg-charcoal-900 border border-charcoal-750 rounded-md p-6 sm:p-8 space-y-4">
+            <h3 class="font-display font-bold text-xl text-ivory-50">
+              ¿Buscas mentoría 1 a 1 o capacitación para tu equipo interno?
+            </h3>
+            <p class="text-sm text-ivory-300 leading-relaxed">
+              Diseñamos el temario y las sesiones prácticas según el nivel actual y las herramientas con las que ya cuenta tu organización.
+            </p>
+            <div class="pt-2 flex flex-col gap-3">
+              <a
+                href={calendarHref}
+                target={calendarExternal ? '_blank' : undefined}
+                rel={calendarExternal ? 'noopener noreferrer' : undefined}
+                data-track-cta="calendar_booking"
+                data-track-location="marca-personal-formacion"
+                data-track-context="Agendar sesión sobre Formación"
+                class="btn-primary w-full justify-center"
+              >
+                <Icon name="calendar" class="w-4 h-4" />
+                <span>Agendar videollamada de diagnóstico</span>
+              </a>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track-cta="whatsapp_message"
+                data-track-location="marca-personal-formacion"
+                data-track-context="Consultar Formación por WhatsApp"
+                class="btn-secondary w-full justify-center"
+              >
+                <Icon name="message-circle" class="w-4 h-4 text-cobalt-400" />
+                <span>Consultar por WhatsApp</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ConversionCalendarBlock
+    eyebrow="Consultoría de Marca Personal"
+    title="Demos el primer paso para ordenar tu narrativa y elevar tu presencia pública."
+    description="Agenda una videollamada de diagnóstico para evaluar el momento actual de tu marca personal y diseñar un plan de trabajo a tu medida."
+    primaryCtaLabel="Agendar diagnóstico de marca personal"
+    secondaryCtaLabel="Escribir por WhatsApp"
+    whatsappContext="marca-personal"
+  />
+</Layout>

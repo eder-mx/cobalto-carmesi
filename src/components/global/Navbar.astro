@@ -1,0 +1,229 @@
+---
+import Icon from '../ui/Icon.astro';
+import {
+  siteConfig,
+  getCalendarUrl,
+  isExternalCalendarUrl,
+  getWhatsAppUrl,
+  type WhatsAppContextKey,
+} from '../../data/siteConfig';
+
+interface Props {
+  currentPath?: string;
+  whatsappContext?: WhatsAppContextKey;
+}
+
+const { currentPath = '/', whatsappContext = 'inicio' } = Astro.props;
+const calendarHref = getCalendarUrl('/contacto#agendar');
+const calendarExternal = isExternalCalendarUrl();
+const whatsappHref = getWhatsAppUrl(whatsappContext);
+
+function isActive(href: string, path: string): boolean {
+  if (href === '/') return path === '/';
+  return path === href || path.startsWith(`${href}/`);
+}
+---
+
+<header
+  class="sticky top-0 z-50 h-20 w-full bg-charcoal-950/85 backdrop-blur-md border-b border-charcoal-750 transition-colors"
+>
+  <div class="mx-auto flex h-full max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12">
+    <!-- Identidad de marca -->
+    <a
+      href="/"
+      class="group inline-flex items-center gap-3 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cobalt-400"
+      aria-label="Cobalto Carmesí Studios — Ir a Inicio"
+    >
+      <img
+        src="/brand/logo-cobalto-horizontal.svg"
+        alt="Cobalto Carmesí Studios"
+        width="196"
+        height="40"
+        class="h-8 sm:h-9 w-auto object-contain transition-opacity duration-200 group-hover:opacity-90"
+      />
+    </a>
+
+    <!-- Navegación principal Desktop -->
+    <nav aria-label="Navegación principal" class="hidden lg:flex items-center gap-7 xl:gap-8">
+      {
+        siteConfig.navigation.main.map((item) => {
+          const active = isActive(item.href, currentPath);
+          return (
+            <a
+              href={item.href}
+              aria-current={active ? 'page' : undefined}
+              class:list={[
+                'relative py-2 text-sm font-medium tracking-wide transition-colors duration-200',
+                active
+                  ? 'text-paper-bone after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-cobalt-500'
+                  : 'text-charcoal-200 hover:text-paper-pure',
+              ]}
+            >
+              {item.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <!-- Acciones Desktop -->
+    <div class="hidden lg:flex items-center gap-4">
+      <a
+        href="/contacto"
+        aria-current={isActive('/contacto', currentPath) ? 'page' : undefined}
+        class:list={[
+          'px-2 py-2 text-sm font-medium transition-colors duration-200',
+          isActive('/contacto', currentPath)
+            ? 'text-paper-bone underline decoration-cobalt-500 underline-offset-8'
+            : 'text-charcoal-300 hover:text-paper-bone',
+        ]}
+      >
+        Contacto
+      </a>
+      <a
+        href={calendarHref}
+        target={calendarExternal ? '_blank' : undefined}
+        rel={calendarExternal ? 'noopener noreferrer' : undefined}
+        data-track-cta="calendar"
+        data-cta="navbar-calendar"
+        data-cta-location="navbar-desktop"
+        class="inline-flex min-h-[44px] items-center justify-center gap-2 rounded bg-cobalt-600 px-5 py-2.5 text-sm font-semibold tracking-wide text-paper-pure transition-all duration-200 hover:bg-cobalt-500 hover:shadow-glow-cobalt active:bg-cobalt-700"
+      >
+        <Icon name="calendar" class="w-4 h-4 shrink-0" />
+        <span>Agendar videollamada</span>
+      </a>
+    </div>
+
+    <!-- Botón Menú Móvil (48x48px touch target) -->
+    <button
+      id="mobile-menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-menu-drawer"
+      aria-label="Abrir menú de navegación"
+      class="inline-flex h-12 w-12 items-center justify-center rounded border border-charcoal-750 bg-charcoal-900 text-paper-bone transition-colors hover:border-cobalt-500 hover:bg-charcoal-800 lg:hidden"
+    >
+      <span id="mobile-icon-open" class="block">
+        <Icon name="menu" class="w-5 h-5" />
+      </span>
+      <span id="mobile-icon-close" class="hidden">
+        <Icon name="x" class="w-5 h-5" />
+      </span>
+    </button>
+  </div>
+
+  <!-- Drawer Móvil Accesible -->
+  <div
+    id="mobile-menu-drawer"
+    hidden
+    class="fixed inset-x-0 top-20 z-50 max-h-[calc(100vh-5rem)] overflow-y-auto border-b border-charcoal-750 bg-charcoal-950/98 px-5 py-8 shadow-surface-card backdrop-blur-xl lg:hidden"
+  >
+    <nav aria-label="Navegación móvil" class="flex flex-col divide-y divide-charcoal-750">
+      <div class="pb-4">
+        <p class="mb-2 text-xs font-semibold uppercase tracking-[0.14em] text-cobalt-300">
+          Servicios y Estudio
+        </p>
+        <ul class="space-y-1">
+          {
+            [
+              { label: 'Inicio', href: '/' },
+              ...siteConfig.navigation.main,
+              { label: 'Eventos Sociales y XV Años', href: '/eventos-sociales' },
+              { label: 'Contacto', href: '/contacto' },
+            ].map((item) => {
+              const active = isActive(item.href, currentPath);
+              return (
+                <li>
+                  <a
+                    href={item.href}
+                    aria-current={active ? 'page' : undefined}
+                    class:list={[
+                      'flex min-h-[48px] items-center justify-between rounded px-3 py-2.5 font-display text-lg font-medium transition-colors',
+                      active
+                        ? 'bg-charcoal-850 text-paper-pure border-l-2 border-cobalt-500 pl-4'
+                        : 'text-charcoal-200 hover:bg-charcoal-900 hover:text-paper-bone',
+                    ]}
+                  >
+                    <span>{item.label}</span>
+                    <Icon name="arrow-right" class="w-4 h-4 text-charcoal-400" />
+                  </a>
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+
+      <div class="pt-6 space-y-3">
+        <p class="text-xs font-semibold uppercase tracking-[0.14em] text-charcoal-400">
+          Iniciar conversación
+        </p>
+        <a
+          href={calendarHref}
+          target={calendarExternal ? '_blank' : undefined}
+          rel={calendarExternal ? 'noopener noreferrer' : undefined}
+          data-track-cta="calendar"
+          data-cta="navbar-mobile-calendar"
+          data-cta-location="navbar-mobile"
+          class="flex min-h-[48px] w-full items-center justify-center gap-2.5 rounded bg-cobalt-600 px-6 py-3.5 text-sm font-semibold tracking-wide text-paper-pure transition-all hover:bg-cobalt-500"
+        >
+          <Icon name="calendar" class="w-5 h-5" />
+          <span>Agendar videollamada</span>
+        </a>
+        <a
+          href={whatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-track-cta="whatsapp"
+          data-cta="navbar-mobile-whatsapp"
+          data-cta-location="navbar-mobile"
+          class="flex min-h-[48px] w-full items-center justify-center gap-2.5 rounded border border-charcoal-600 bg-charcoal-900/80 px-6 py-3.5 text-sm font-medium text-paper-bone transition-colors hover:border-cobalt-400 hover:bg-charcoal-800"
+        >
+          <Icon name="message-circle" class="w-5 h-5 text-cobalt-400" />
+          <span>Escribir por WhatsApp</span>
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const drawer = document.getElementById('mobile-menu-drawer');
+  const iconOpen = document.getElementById('mobile-icon-open');
+  const iconClose = document.getElementById('mobile-icon-close');
+
+  function setMenuState(isOpen: boolean) {
+    if (!toggleBtn || !drawer || !iconOpen || !iconClose) return;
+    toggleBtn.setAttribute('aria-expanded', String(isOpen));
+    toggleBtn.setAttribute(
+      'aria-label',
+      isOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'
+    );
+    if (isOpen) {
+      drawer.removeAttribute('hidden');
+      iconOpen.classList.add('hidden');
+      iconClose.classList.remove('hidden');
+    } else {
+      drawer.setAttribute('hidden', '');
+      iconOpen.classList.remove('hidden');
+      iconClose.classList.add('hidden');
+    }
+  }
+
+  toggleBtn?.addEventListener('click', () => {
+    const isExpanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+    setMenuState(!isExpanded);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggleBtn?.getAttribute('aria-expanded') === 'true') {
+      setMenuState(false);
+      toggleBtn.focus();
+    }
+  });
+
+  drawer?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => setMenuState(false));
+  });
+</script>

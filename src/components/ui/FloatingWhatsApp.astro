@@ -1,0 +1,32 @@
+---
+import Icon from './Icon.astro';
+import { getWhatsAppUrl, type WhatsAppContextKey } from '../../data/siteConfig';
+
+interface Props {
+  context?: WhatsAppContextKey;
+}
+
+const { context = 'inicio' } = Astro.props;
+const whatsappHref = getWhatsAppUrl(context);
+---
+
+<div class="fixed bottom-6 right-6 z-40">
+  <a
+    href={whatsappHref}
+    target="_blank"
+    rel="noopener noreferrer"
+    data-cta="whatsapp-floating"
+    data-track-cta="whatsapp"
+    data-cta-location={`floating-${context}`}
+    aria-label="Escribir por WhatsApp a Cobalto Carmesí Studios"
+    class="group inline-flex h-12 items-center gap-2.5 rounded border border-charcoal-700 bg-charcoal-900/95 px-4 text-paper-bone shadow-surface-card backdrop-blur-md transition-all duration-200 hover:border-cobalt-500 hover:bg-charcoal-800 hover:shadow-glow-cobalt"
+  >
+    <span class="relative flex h-2 w-2">
+      <span class="relative inline-flex h-2 w-2 rounded-full bg-cobalt-400"></span>
+    </span>
+    <Icon name="message-circle" class="w-5 h-5 text-cobalt-400 transition-transform group-hover:scale-105" />
+    <span class="hidden sm:inline text-xs font-semibold tracking-wide">
+      WhatsApp Directo
+    </span>
+  </a>
+</div>

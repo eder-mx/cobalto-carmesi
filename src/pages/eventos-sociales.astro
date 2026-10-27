@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/ui/Icon.astro';
+import ConversionCalendarBlock from '../components/sections/ConversionCalendarBlock.astro';
+import {
+  getCalendarUrl,
+  isExternalCalendarUrl,
+  getWhatsAppUrl,
+} from '../data/siteConfig';
+
+const calendarHref = getCalendarUrl('/contacto#agendar');
+const calendarExternal = isExternalCalendarUrl();
+const whatsappHref = getWhatsAppUrl('eventos-sociales');
+
+const coveragePillars = [
+  {
+    title: 'Sesiones Previas o Posteriores con Dirección Editorial',
+    description:
+      'Realizamos sesiones formales o conceptuales en estudio o locación antes o después del evento, cuidando el vestuario, la luz y el estilo de la festejada, pareja o familia.',
+    icon: 'camera' as const,
+  },
+  {
+    title: 'Crónica Documental durante la Celebración',
+    description:
+      'Registramos la ceremonia, los detalles arquitectónicos y la recepción con discreción y sensibilidad, capturando miradas, abrazos y momentos irrepetibles sin interrumpir el flujo del evento.',
+    icon: 'eye' as const,
+  },
+  {
+    title: 'Cinematografía de Evento y Piezas Cortas',
+    description:
+      'Producimos tanto la película documental con narrativa sonora y corrección de color como cápsulas dinámicas listas para compartir con familiares y amigos.',
+    icon: 'film' as const,
+  },
+];
+---
+
+<Layout
+  title="Fotografía y Video para Eventos Sociales y XV Años | Cobalto Carmesí Studios"
+  description="Cobertura fotográfica y audiovisual con mirada documental y estética cinematográfica para eventos sociales, celebraciones familiares y XV años."
+  canonicalPath="/eventos-sociales"
+  whatsappContext="eventos-sociales"
+>
+  <!-- HERO DE EVENTOS SOCIALES Y XV AÑOS -->
+  <section class="py-16 sm:py-24 bg-charcoal-950 bg-crimson-spotlight border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-6">
+        <span class="inline-flex items-center px-3 py-1 rounded-sm bg-charcoal-900 border border-charcoal-750 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+          Línea Especializada · Crónica Visual y Retrato Editorial
+        </span>
+
+        <h1 class="font-display font-bold text-4xl sm:text-5xl text-ivory-50 leading-[1.08] tracking-tight">
+          Fotografía y Video para Eventos Sociales y XV Años con mirada cinematográfica.
+        </h1>
+
+        <p class="text-lg sm:text-xl text-ivory-300 leading-relaxed">
+          Documentamos celebraciones importantes alejándonos de las fórmulas acartonadas. Combinamos sesiones de retrato de corte editorial con una cobertura sensible, estética y perdurable.
+        </p>
+
+        <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-track-cta="whatsapp_message"
+            data-track-location="eventos-hero"
+            data-track-context="Consultar disponibilidad de fecha por WhatsApp"
+            class="btn-primary justify-center"
+          >
+            <Icon name="message-circle" class="w-5 h-5" />
+            <span>Consultar disponibilidad de fecha</span>
+          </a>
+
+          <a
+            href={calendarHref}
+            target={calendarExternal ? '_blank' : undefined}
+            rel={calendarExternal ? 'noopener noreferrer' : undefined}
+            data-track-cta="calendar_booking"
+            data-track-location="eventos-hero"
+            data-track-context="Agendar videollamada de planeación"
+            class="btn-secondary justify-center"
+          >
+            <Icon name="calendar" class="w-5 h-5 text-cobalt-400" />
+            <span>Agendar videollamada</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILARES DE COBERTURA -->
+  <section class="py-16 md:py-24 bg-charcoal-900 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12">
+        <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+          Criterio Visual en Celebraciones
+        </p>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight mb-4">
+          Un recuerdo que conserva su elegancia con el paso de los años.
+        </h2>
+        <p class="text-base text-ivory-300 leading-relaxed">
+          Aplicamos el mismo rigor de iluminación, óptica y narrativa del estudio a tus celebraciones privadas, logrando imágenes con carácter propio.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        {coveragePillars.map((pillar) => (
+          <div class="rounded-md border border-charcoal-750 bg-charcoal-950 p-6 sm:p-8">
+            <div class="w-10 h-10 rounded-sm bg-charcoal-900 border border-charcoal-750 flex items-center justify-center text-cobalt-400 mb-5">
+              <Icon name={pillar.icon} class="w-5 h-5" />
+            </div>
+            <h3 class="font-display font-bold text-xl text-ivory-50 mb-3">
+              {pillar.title}
+            </h3>
+            <p class="text-sm sm:text-base text-ivory-300 leading-relaxed">
+              {pillar.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO DE RESERVA Y PLANEACIÓN -->
+  <section class="py-16 md:py-24 bg-charcoal-950 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-md border border-charcoal-750 bg-charcoal-900 p-8 sm:p-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-4">
+            <span class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+              Cotización Personalizada según tu Evento
+            </span>
+            <h2 class="font-display font-bold text-2xl sm:text-3xl text-ivory-50 leading-snug">
+              Cada celebración tiene tiempos, locaciones y momentos distintos.
+            </h2>
+            <p class="text-sm sm:text-base text-ivory-300 leading-relaxed">
+              Para brindarte una propuesta exacta, revisamos contigo la fecha del evento, las sedes de ceremonia y recepción, el interés en sesiones previas o tomas aéreas con dron y el formato de entrega que prefieres.
+            </p>
+          </div>
+          <div class="lg:col-span-5 flex flex-col gap-3">
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-cta="whatsapp_message"
+              data-track-location="eventos-planeacion"
+              data-track-context="Verificar fecha por WhatsApp"
+              class="btn-primary w-full justify-center"
+            >
+              <Icon name="message-circle" class="w-4 h-4" />
+              <span>Verificar fecha por WhatsApp</span>
+            </a>
+            <a
+              href={calendarHref}
+              target={calendarExternal ? '_blank' : undefined}
+              rel={calendarExternal ? 'noopener noreferrer' : undefined}
+              data-track-cta="calendar_booking"
+              data-track-location="eventos-planeacion"
+              data-track-context="Agendar reunión virtual"
+              class="btn-secondary w-full justify-center"
+            >
+              <Icon name="calendar" class="w-4 h-4 text-cobalt-400" />
+              <span>Agendar reunión de planeación</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ConversionCalendarBlock
+    eyebrow="Disponibilidad de Fechas · Eventos Sociales"
+    title="Platiquemos sobre la fecha y los detalles de tu celebración."
+    description="Escríbenos por WhatsApp o agenda una videollamada para confirmar disponibilidad en calendario y diseñar el alcance fotográfico y audiovisual de tu evento."
+    primaryCtaLabel="Agendar videollamada"
+    secondaryCtaLabel="Consultar fecha por WhatsApp"
+    whatsappContext="eventos-sociales"
+  />
+</Layout>

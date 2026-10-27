@@ -1,0 +1,131 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/global/Navbar.astro';
+import Footer from '../components/global/Footer.astro';
+import FloatingWhatsApp from '../components/ui/FloatingWhatsApp.astro';
+import { siteConfig, type WhatsAppContextKey } from '../data/siteConfig';
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath?: string;
+  whatsappContext?: WhatsAppContextKey;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonicalPath = Astro.url.pathname,
+  whatsappContext = 'inicio',
+  noindex = false,
+} = Astro.props;
+
+const canonicalUrl = new URL(canonicalPath, siteConfig.seo.siteUrl).toString();
+---
+
+<!doctype html>
+<html lang="es-MX" class="dark scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <!-- Favicon & Identidad -->
+    <link rel="icon" type="image/svg+xml" href="/brand/logo-cobalto-isotipo.svg" />
+    <meta name="theme-color" content="#090B10" />
+
+    <!-- Preload de tipografías variables locales WOFF2 (CA-RESP-02 / Design Foundations) -->
+    <link
+      rel="preload"
+      href="/fonts/CabinetGrotesk-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/fonts/Satoshi-Variable.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={siteConfig.seo.locale} />
+    <meta property="og:site_name" content={siteConfig.brand.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={new URL('/brand/logo-cobalto-horizontal.svg', siteConfig.seo.siteUrl).toString()} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-charcoal-950 text-ivory-100 font-sans antialiased selection:bg-cobalt-600 selection:text-ivory-50 overflow-x-hidden">
+    <!-- Skip link accesible por teclado (CA-ACC-01) -->
+    <a
+      href="#contenido-principal"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-5 focus:py-3 focus:bg-cobalt-600 focus:text-ivory-50 focus:rounded-sm focus:font-medium focus:shadow-lg"
+    >
+      Saltar al contenido principal
+    </a>
+
+    <Navbar currentPath={Astro.url.pathname} whatsappContext={whatsappContext} />
+
+    <main id="contenido-principal" class="flex-1">
+      <slot />
+    </main>
+
+    <Footer whatsappContext={whatsappContext} />
+    <FloatingWhatsApp context={whatsappContext} />
+
+    <!-- Medición agnóstica de conversión (CA-SEO-04) -->
+    <script>
+      declare global {
+        interface Window {
+          dataLayer?: Record<string, unknown>[];
+        }
+      }
+
+      document.addEventListener('click', (event) => {
+        const target = event.target as HTMLElement | null;
+        if (!target) return;
+
+        const trackedElement = target.closest<HTMLElement>('[data-track-cta], [data-track]');
+        if (!trackedElement) return;
+
+        const ctaType =
+          trackedElement.getAttribute('data-track-cta') ||
+          trackedElement.getAttribute('data-track') ||
+          'interaction';
+        const ctaLocation =
+          trackedElement.getAttribute('data-track-location') ||
+          trackedElement.getAttribute('data-cta-context') ||
+          window.location.pathname;
+        const ctaContext =
+          trackedElement.getAttribute('data-track-context') ||
+          trackedElement.textContent?.trim().slice(0, 80) ||
+          '';
+
+        const payload = {
+          event: 'cobalto_cta_click',
+          cta_type: ctaType,
+          cta_location: ctaLocation,
+          cta_context: ctaContext,
+          page_path: window.location.pathname,
+          timestamp: new Date().toISOString(),
+        };
+
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(payload);
+        window.dispatchEvent(new CustomEvent('cobalto:track', { detail: payload }));
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/ui/Icon.astro';
+import ConversionCalendarBlock from '../components/sections/ConversionCalendarBlock.astro';
+import {
+  getCalendarUrl,
+  isExternalCalendarUrl,
+  getWhatsAppUrl,
+} from '../data/siteConfig';
+
+const calendarHref = getCalendarUrl('/contacto#agendar');
+const calendarExternal = isExternalCalendarUrl();
+const whatsappHref = getWhatsAppUrl('fotografia');
+
+const corporateDeliverables = [
+  'Retrato corporativo y editorial de directivos, socios y equipos de trabajo.',
+  'Fotografía comercial de producto, gastronomía y detalle con iluminación de estudio.',
+  'Registro arquitectónico y de atmósfera para clínicas, despachos, restaurantes, hoteles y oficinas.',
+  'Bancos de imagen propios para sitios web, reportes anuales, prensa y campañas digitales.',
+];
+
+const personalDeliverables = [
+  'Sesiones de retrato personal, artístico o editorial con estética de claroscuro o luz natural.',
+  'Dirección cercana de postura, expresión y actitud para personas sin experiencia frente a cámara.',
+  'Sesiones de pareja, maternidad o retrato familiar sobrio y atemporal, lejos de poses artificiales.',
+  'Asesoría previa sobre concepto visual, selección de vestuario, atmósfera y locación.',
+];
+---
+
+<Layout
+  title="Fotografía para Empresas y Sesiones Particulares | Cobalto Carmesí Studios"
+  description="Dirección fotográfica con iluminación de estudio y carácter editorial. Fotografía comercial, corporativa, de producto, espacios y sesiones de retrato particular."
+  canonicalPath="/fotografia"
+  whatsappContext="fotografia"
+>
+  <!-- HERO DE FOTOGRAFÍA -->
+  <section class="py-16 sm:py-24 bg-charcoal-950 bg-cobalt-chiaroscuro border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-6">
+        <span class="inline-flex items-center px-3 py-1 rounded-sm bg-charcoal-900 border border-charcoal-750 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+          Dirección de Fotografía · Empresas y Particulares
+        </span>
+
+        <h1 class="font-display font-bold text-4xl sm:text-5xl text-ivory-50 leading-[1.08] tracking-tight">
+          Fotografía con carácter, control de luz e intención narrativa.
+        </h1>
+
+        <p class="text-lg sm:text-xl text-ivory-300 leading-relaxed">
+          Una fotografía bien dirigida transforma la percepción de una empresa y revela la presencia genuina de una persona. Diseñamos sesiones tanto para marcas comerciales como para particulares que valoran el oficio visual.
+        </p>
+
+        <!-- Selector rápido de vía (Dual Track) -->
+        <div class="pt-3 flex flex-wrap gap-4">
+          <a href="#empresas" class="btn-primary">
+            <Icon name="camera" class="w-4 h-4" />
+            <span>Fotografía para Empresas</span>
+          </a>
+          <a href="#sesiones-particulares" class="btn-secondary">
+            <Icon name="aperture" class="w-4 h-4 text-cobalt-400" />
+            <span>Sesiones para Particulares</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VÍA 1: FOTOGRAFÍA PARA EMPRESAS Y NEGOCIOS (SERVICIO C) -->
+  <section id="empresas" class="py-16 md:py-24 bg-charcoal-900 border-b border-charcoal-750 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7 space-y-5">
+          <span class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+            Línea Comercial y Corporativa
+          </span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight">
+            Fotografía para Empresas y Negocios que necesitan proyectar solidez.
+          </h2>
+          <p class="text-base text-ivory-300 leading-relaxed">
+            Reemplazamos las fotos de stock impersonales y las imágenes improvisadas con celular por un banco visual propio, coherente y alineado con la categoría de tu negocio. Cuidamos cada textura, reflejo y encuadre para elevar el valor percibido de tus productos, instalaciones y equipo humano.
+          </p>
+
+          <ul class="space-y-3 pt-2">
+            {corporateDeliverables.map((item) => (
+              <li class="flex items-start gap-3 text-sm sm:text-base text-ivory-300">
+                <Icon name="check" class="w-5 h-5 text-cobalt-400 shrink-0 mt-0.5" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="pt-4 flex flex-wrap gap-4">
+            <a
+              href={calendarHref}
+              target={calendarExternal ? '_blank' : undefined}
+              rel={calendarExternal ? 'noopener noreferrer' : undefined}
+              data-track-cta="calendar_booking"
+              data-track-location="fotografia-empresas"
+              data-track-context="Cotizar Fotografía para Empresas"
+              class="btn-primary"
+            >
+              <Icon name="calendar" class="w-4 h-4" />
+              <span>Agendar diagnóstico comercial</span>
+            </a>
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-cta="whatsapp_message"
+              data-track-location="fotografia-empresas"
+              data-track-context="WhatsApp Fotografía Empresas"
+              class="btn-secondary"
+            >
+              <Icon name="message-circle" class="w-4 h-4 text-cobalt-400" />
+              <span>Cotizar por WhatsApp</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="rounded-md border border-charcoal-750 bg-charcoal-950 overflow-hidden">
+            <img
+              src="/media/portfolio/case-durambene.svg"
+              alt="Estudio de iluminación comercial y fotografía de producto de Cobalto Carmesí Studios"
+              width="800"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+              class="w-full aspect-[4/5] object-cover"
+            />
+            <div class="p-6 border-t border-charcoal-750">
+              <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-1">
+                Aplicación en Portafolio
+              </p>
+              <p class="text-sm text-ivory-300">
+                Casos como <strong class="text-ivory-50">Durambene</strong> y <strong class="text-ivory-50">H Centro Hidrofacial</strong> muestran cómo la iluminación controlada transforma la percepción de un producto o espacio clínico.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VÍA 2: SESIONES FOTOGRÁFICAS PARA PARTICULARES (SERVICIO D) -->
+  <section id="sesiones-particulares" class="py-16 md:py-24 bg-charcoal-950 border-b border-charcoal-750 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-5 order-2 lg:order-1">
+          <div class="rounded-md border border-charcoal-750 bg-charcoal-900 overflow-hidden">
+            <img
+              src="/media/portfolio/case-angie-mesta.svg"
+              alt="Composición de retrato editorial en claroscuro por Cobalto Carmesí Studios"
+              width="800"
+              height="1000"
+              loading="lazy"
+              decoding="async"
+              class="w-full aspect-[4/5] object-cover"
+            />
+            <div class="p-6 border-t border-charcoal-750">
+              <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-1">
+                Dirección Cercana en Set
+              </p>
+              <p class="text-sm text-ivory-300">
+                No necesitas saber posar antes de llegar al estudio; te acompañamos en cada gesto, ángulo e intención durante toda la sesión.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 order-1 lg:order-2 space-y-5">
+          <span class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+            Retrato Editorial y Personal
+          </span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight">
+            Sesiones Fotográficas para Particulares con estética de autor.
+          </h2>
+          <p class="text-base text-ivory-300 leading-relaxed">
+            Creamos retratos individuales, de pareja o familiares con una atmósfera íntima y atemporal. Inspirados en el manejo dramático y elegante de la luz, diseñamos cada sesión para capturar carácter, autenticidad y presencia sin caer en escenografías genéricas.
+          </p>
+
+          <ul class="space-y-3 pt-2">
+            {personalDeliverables.map((item) => (
+              <li class="flex items-start gap-3 text-sm sm:text-base text-ivory-300">
+                <Icon name="check" class="w-5 h-5 text-cobalt-400 shrink-0 mt-0.5" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="pt-4 flex flex-wrap gap-4">
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track-cta="whatsapp_message"
+              data-track-location="fotografia-particulares"
+              data-track-context="Reservar Sesión Particular por WhatsApp"
+              class="btn-primary"
+            >
+              <Icon name="message-circle" class="w-4 h-4" />
+              <span>Consultar sesión por WhatsApp</span>
+            </a>
+            <a
+              href={calendarHref}
+              target={calendarExternal ? '_blank' : undefined}
+              rel={calendarExternal ? 'noopener noreferrer' : undefined}
+              data-track-cta="calendar_booking"
+              data-track-location="fotografia-particulares"
+              data-track-context="Agendar videollamada de planeación"
+              class="btn-secondary"
+            >
+              <Icon name="calendar" class="w-4 h-4 text-cobalt-400" />
+              <span>Agendar llamada de planeación</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ConversionCalendarBlock
+    eyebrow="Proyectos Fotográficos a Medida"
+    title="Platiquemos sobre la sesión o producción fotográfica que tienes en mente."
+    description="Ya sea para renovar la imagen comercial de tu empresa o realizar una sesión de retrato personal, diseñamos una propuesta acorde a tu objetivo."
+    primaryCtaLabel="Agendar videollamada"
+    secondaryCtaLabel="Escribir por WhatsApp"
+    whatsappContext="fotografia"
+  />
+</Layout>

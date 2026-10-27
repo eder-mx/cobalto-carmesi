@@ -1,0 +1,218 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/ui/Icon.astro';
+import ConversionCalendarBlock from '../components/sections/ConversionCalendarBlock.astro';
+import { siteConfig, getCalendarUrl, isExternalCalendarUrl, getWhatsAppUrl } from '../data/siteConfig';
+
+const calendarHref = getCalendarUrl('/contacto#agendar');
+const calendarExternal = isExternalCalendarUrl();
+const whatsappHref = getWhatsAppUrl('el-estudio');
+
+const philosophyPillars = [
+  {
+    title: 'Profundidad Estratégica (Azul Cobalto)',
+    description:
+      'Representa el pensamiento estructurado, la serenidad intelectual, el orden arquitectónico y la precisión técnica con la que diagnosticamos cada proyecto.',
+    icon: 'compass' as const,
+  },
+  {
+    title: 'Fuerza Expresiva y Deseo (Carmesí)',
+    description:
+      'Encarna la intensidad emocional, el carácter artístico, la calidez humana y el magnetismo necesario para que una marca o retrato no pase desapercibido.',
+    icon: 'sparkles' as const,
+  },
+  {
+    title: 'Estética del Claroscuro',
+    description:
+      'Inspirados en la pintura clásica y la cinematografía contemporánea, esculpimos con luz y sombra para dar volumen, sobriedad y permanencia a cada imagen.',
+    icon: 'eye' as const,
+  },
+  {
+    title: 'Narrativa con Propósito',
+    description:
+      'Rechazamos el contenido vacío. Cada fotografía, guion o pieza audiovisual cumple una función clara dentro de la reputación de quien confía en nosotros.',
+    icon: 'layers' as const,
+  },
+];
+
+const fiveArguments = [
+  'Dirección creativa integral: unimos consultoría, guion, cámara, luz y edición bajo una sola visión coherente.',
+  'Especialización real en perfiles no actores: acompañamos paso a paso a profesionistas, directivos y familias frente a cámara.',
+  'Rigor técnico en imagen y sonido: cuidamos la óptica, la acústica y el color para elevar el valor percibido de tu marca.',
+  'Honestidad comercial: trabajamos mediante diagnóstico personalizado, sin paquetes genéricos ni promesas engañosas.',
+  'Evolución constante y transferencia de criterio: además de producir, formamos a personas y equipos para comunicar mejor.',
+];
+---
+
+<Layout
+  title="El Estudio y Dirección Creativa | Cobalto Carmesí Studios"
+  description="Conoce la filosofía de Cobalto Carmesí Studios, la evolución estratégica desde Sefirot y la Dirección Creativa de Darío Ilescas Cruz."
+  canonicalPath="/el-estudio"
+  whatsappContext="el-estudio"
+>
+  <!-- HERO DE EL ESTUDIO -->
+  <section class="py-16 sm:py-24 bg-charcoal-950 bg-cobalt-chiaroscuro border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-6">
+        <span class="inline-flex items-center px-3 py-1 rounded-sm bg-charcoal-900 border border-charcoal-750 text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+          Identidad, Criterio y Evolución · De Sefirot a Cobalto Carmesí Studios
+        </span>
+
+        <h1 class="font-display font-bold text-4xl sm:text-5xl text-ivory-50 leading-[1.08] tracking-tight">
+          Un estudio creativo donde estrategia, estética y narrativa trabajan juntas.
+        </h1>
+
+        <p class="text-lg sm:text-xl text-ivory-300 leading-relaxed">
+          Nacimos para acompañar a marcas, empresas y profesionistas que comprenden que la forma en que se presentan al mundo es una extensión directa de su rigor, su ética y su oficio.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVOLUCIÓN SEFIROT -> COBALTO CARMESÍ STUDIOS (CA-ABOUT-01) -->
+  <section class="py-16 md:py-24 bg-charcoal-900 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <div class="lg:col-span-5">
+          <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+            Nuestra Evolución
+          </p>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight">
+            De Sefirot a Cobalto Carmesí Studios: madurez conceptual y enfoque estratégico.
+          </h2>
+        </div>
+
+        <div class="lg:col-span-7 space-y-5 text-base sm:text-lg text-ivory-300 leading-relaxed">
+          <p>
+            Durante nuestra etapa previa como <em>Sefirot</em>, construimos una base técnica sólida en fotografía y producción audiovisual. Con el tiempo, descubrimos que nuestros clientes no solo necesitaban una cámara bien operada: necesitaban claridad sobre qué decir, cómo estructurar su identidad pública y cómo proyectar autoridad real.
+          </p>
+          <p>
+            <strong class="text-ivory-50 font-medium">Cobalto Carmesí Studios</strong> representa esa evolución natural hacia una firma de dirección creativa integral. Conservamos todo el oficio técnico en iluminación, óptica y montaje, pero ahora lo ponemos al servicio de la estrategia de marca personal, el contenido con propósito y la comunicación de alto valor.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOS 4 PILARES DE FILOSOFÍA VISUAL Y ESTRATÉGICA -->
+  <section class="py-16 md:py-24 bg-charcoal-950 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12">
+        <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400 mb-3">
+          Manifiesto Estético y Operativo
+        </p>
+        <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight">
+          La dualidad entre precisión arquitectónica e intensidad humana.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        {philosophyPillars.map((pillar) => (
+          <div class="rounded-md border border-charcoal-750 bg-charcoal-900 p-6 sm:p-8">
+            <div class="w-10 h-10 rounded-sm bg-charcoal-850 border border-charcoal-750 flex items-center justify-center text-cobalt-400 mb-5">
+              <Icon name={pillar.icon} class="w-5 h-5" />
+            </div>
+            <h3 class="font-display font-bold text-xl text-ivory-50 mb-3">
+              {pillar.title}
+            </h3>
+            <p class="text-sm sm:text-base text-ivory-300 leading-relaxed">
+              {pillar.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DIRECCIÓN CREATIVA: DARÍO ILESCAS CRUZ (CA-ABOUT-01) -->
+  <section class="py-16 md:py-24 bg-charcoal-900 border-b border-charcoal-750">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-5">
+          <div class="rounded-md border border-charcoal-750 bg-charcoal-950 p-6 sm:p-8 space-y-5">
+            <img
+              src="/media/portfolio/case-cobalto-evolucion.svg"
+              alt="Dirección Creativa de Cobalto Carmesí Studios liderada por Darío Ilescas Cruz"
+              width="1280"
+              height="720"
+              loading="lazy"
+              decoding="async"
+              class="w-full aspect-[16/10] object-cover rounded-sm border border-charcoal-750"
+            />
+            <div>
+              <p class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+                {siteConfig.brand.creativeDirector.role}
+              </p>
+              <h3 class="font-display font-bold text-2xl text-ivory-50 mt-1">
+                {siteConfig.brand.creativeDirector.name}
+              </h3>
+              <p class="text-sm text-ivory-300 mt-2 leading-relaxed">
+                {siteConfig.brand.creativeDirector.bioSummary}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 space-y-6">
+          <span class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+            Liderazgo y Criterio en cada Proyecto
+          </span>
+          <h2 class="font-display font-bold text-3xl sm:text-4xl text-ivory-50 leading-tight">
+            Dirección Creativa cercana, rigurosa y comprometida con la verdad de tu proyecto.
+          </h2>
+          <p class="text-base text-ivory-300 leading-relaxed">
+            Bajo la dirección creativa de <strong class="text-ivory-50 font-medium">Darío Ilescas Cruz</strong>, cada proyecto en Cobalto Carmesí Studios es abordado con mirada autoral y disciplina estratégica. No delegamos la visión de tu marca a procesos mecánicos: nos involucramos personalmente en entender quién eres, qué te distingue y cómo traducirlo al lenguaje de la imagen y el sonido.
+          </p>
+
+          <div class="border-t border-charcoal-750 pt-6">
+            <h3 class="font-display font-bold text-lg text-ivory-50 mb-4">
+              Cinco principios que rigen nuestro trabajo diario:
+            </h3>
+            <ul class="space-y-3">
+              {fiveArguments.map((item) => (
+                <li class="flex items-start gap-3 text-sm sm:text-base text-ivory-300">
+                  <Icon name="check" class="w-5 h-5 text-cobalt-400 shrink-0 mt-0.5" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOCACIÓN FORMATIVA DEL ESTUDIO (#formacion) -->
+  <section id="formacion" class="py-16 md:py-20 bg-charcoal-950 border-b border-charcoal-750 scroll-mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-md border border-charcoal-750 bg-charcoal-900 p-8 sm:p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+        <div class="max-w-2xl space-y-3">
+          <span class="text-xs font-sans font-semibold uppercase tracking-[0.08em] text-cobalt-400">
+            Formación y Mentoría Creativa
+          </span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl text-ivory-50">
+            Compartimos nuestro método para que personas y equipos comuniquen con criterio propio.
+          </h2>
+          <p class="text-sm sm:text-base text-ivory-300 leading-relaxed">
+            Conoce nuestra línea de entrenamiento en comunicación frente a cámara, narrativa y producción audiovisual en la sección especializada de Formación y Mentoría.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-4 shrink-0">
+          <a href="/marca-personal#formacion-y-mentoria" class="btn-secondary">
+            <span>Ver Formación y Mentoría</span>
+            <Icon name="arrow-right" class="w-4 h-4" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ConversionCalendarBlock
+    eyebrow="Conversación Directa con el Estudio"
+    title="Conozcamos tu proyecto y construyamos una propuesta con verdadero criterio."
+    description="Agenda una videollamada de diagnóstico o escríbenos por WhatsApp para conversar directamente sobre los objetivos de tu marca, empresa o proyecto personal."
+    primaryCtaLabel="Agendar videollamada"
+    secondaryCtaLabel="Escribir por WhatsApp"
+    whatsappContext="el-estudio"
+  />
+</Layout>
